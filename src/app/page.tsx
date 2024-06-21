@@ -40,7 +40,7 @@ export default function Page() {
     <main className="flex min-h-screen flex-col items-center justify-center p-24">
       <div className="flex flex-col items-center justify-center h-full font-grotesk">
         <div className="text-8xl text-animation opacity-0">
-          hi. i'm swad.
+          hi. i&apos;m swad.
         </div>
         <div className="flex space-x-4 mt-8 text-4xl font-mono button-animation opacity-0">
           <Link href="/about">

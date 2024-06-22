@@ -2,6 +2,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     webpack: (config, { isServer }) => {
+      config.resolve.alias.canvas = false;
       // Add a rule for mjs files to be treated as modules
       config.module.rules.push({
         test: /\.mjs$/,
@@ -10,6 +11,7 @@ const nextConfig = {
 
       return config;
     },
+
   };
 
   export default nextConfig;

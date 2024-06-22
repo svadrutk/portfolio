@@ -1,15 +1,11 @@
-'use client'
+'use client';
 import React, { useState, useEffect } from 'react';
-import { Document, Page, pdfjs } from 'react-pdf';
+import { Document, Page } from 'react-pdf';
 import { IoArrowBack } from 'react-icons/io5';
-import Link from 'next/link';
 import anime from 'animejs';
+import { pdfjs } from 'react-pdf';
 
-pdfjs.GlobalWorkerOptions.workerSrc = new URL(
-  'pdfjs-dist/build/pdf.worker.min.mjs',
-  import.meta.url,
-).toString();
-
+pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
 export default function Resume() {
   const [numPages, setNumPages] = useState<number>();
   const [pageNumber, setPageNumber] = useState<number>(1);
@@ -68,7 +64,7 @@ export default function Resume() {
         duration: 200,
         offset: '-=400', // Overlap with previous animation
         complete: () => {
-          window.location.href = '/';
+          window.location.href = "/";
         }
       })
   };
@@ -114,7 +110,7 @@ export default function Resume() {
           </div>
         </div>
         <div className="border rounded shadow-lg h-3/4 overflow-y-scroll pdf-section">
-          <Document file="/resume.pdf" onLoadSuccess={onDocumentLoadSuccess}>
+          <Document file="./resume.pdf" onLoadSuccess={onDocumentLoadSuccess}>
             <Page
               pageNumber={pageNumber}
               renderAnnotationLayer={false}

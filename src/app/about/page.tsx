@@ -4,6 +4,7 @@ import { Document, Page } from 'react-pdf';
 import { IoArrowBack } from 'react-icons/io5';
 import anime from 'animejs';
 import { pdfjs } from 'react-pdf';
+import 'core-js/features/promise/';
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
 export default function Resume() {

@@ -2,6 +2,7 @@
 import React, { useEffect } from "react";
 import Link from "next/link";
 import anime from "animejs";
+import 'core-js/features/promise'; // Example import for Promise polyfill
 
 export default function Page() {
   useEffect(() => {

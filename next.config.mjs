@@ -8,6 +8,12 @@ const nextConfig = {
         test: /\.mjs$/,
         type: 'javascript/auto', // Ensure .mjs files are treated as modules
       });
+      if (!isServer) {
+        config.resolve.alias = {
+          'core-js-pure': 'core-js/features',
+        };
+      }
+
 
       return config;
     },

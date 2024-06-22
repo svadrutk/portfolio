@@ -115,19 +115,24 @@ export default function Resume() {
             <p className='text-xl md:text-2xl lg:text-3xl mb-6'>
               If you’d like to chat, see my contact info below:
             </p>
+            {isSmallScreen ? (
             <p className='text-xl md:text-2xl lg:text-3xl mb-6'>
               email: <a className="text-sky-500 underline truncate" href="mailto:kukunoorusvadrut@gmail.com" target="_blank">kukunoorusvadrut@gmail.com</a> <br />
               linkedin: <a className="text-sky-500 underline" href="https://www.linkedin.com/in/svadrut/" target="_blank">linkedin.com/in/svadrut</a> <br />
               github: <a className="text-sky-500 underline" href="https://www.github.com/svadrutk" target="_blank">github.com/svadrutk</a> <br />
-
+              resume: <a className="text-sky-500 underline" href="https://github.com/svadrutk/college/blob/main/resume/resume.pdf" target="_blank">resume.pdf</a>
             </p>
+            ) : (
+            <p className='text-xl md:text-2xl lg:text-3xl mb-6'>
+              email: <a className="text-sky-500 underline truncate" href="mailto:kukunoorusvadrut@gmail.com" target="_blank">kukunoorusvadrut@gmail.com</a> <br />
+              linkedin: <a className="text-sky-500 underline" href="https://www.linkedin.com/in/svadrut/" target="_blank">linkedin.com/in/svadrut</a> <br />
+              github: <a className="text-sky-500 underline" href="https://www.github.com/svadrutk" target="_blank">github.com/svadrutk</a> <br />
+            </p>
+            )}
           </div>
         </div>
         {isSmallScreen ? (
           <p className="text-xl md:text-2xl lg:text-3xl text-center h-3/4 align-middle pdf-section">
-          <a href="https://github.com/svadrutk/college/blob/main/resume/resume.pdf" className="text-sky-500 text-xl md:text-2xl lg:text-3xl underline pdf-section" target="_blank">
-            resume.pdf
-          </a>
           </p>
         ) : (
           <div className="border rounded shadow-lg h-3/4 overflow-y-scroll pdf-section">

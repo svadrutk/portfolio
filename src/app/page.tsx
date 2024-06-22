@@ -33,7 +33,6 @@ export default function Page() {
         translateY: [0, -20],
         easing: 'easeOutExpo',
         duration: 200,
-        offset: '-=400', // Overlap with previous animation
       })
   };
 

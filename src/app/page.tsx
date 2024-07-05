@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import React, { useEffect } from "react";
 import Link from "next/link";
 import anime from "animejs";
@@ -33,7 +33,7 @@ export default function Page() {
         translateY: [0, -20],
         easing: 'easeOutExpo',
         duration: 200,
-      })
+      });
   };
 
   return (
@@ -46,6 +46,11 @@ export default function Page() {
           <Link href="/about">
             <button className="bg-black-500 border-solid border-2 border-white text-white font-bold py-4 px-20 rounded hover:border-sky-500 hover:text-sky-500 transition" onClick={animateOut}>
               about
+            </button>
+          </Link>
+          <Link href="https://goodreads.com/svadrut" target="_blank">
+            <button className="bg-black-500 border-solid border-2 border-white text-white font-bold py-4 px-20 rounded hover:border-emerald-500 hover:text-emerald-500 transition" onClick={animateOut}>
+              reads
             </button>
           </Link>
         </div>

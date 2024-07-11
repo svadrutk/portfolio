@@ -14,21 +14,28 @@ export default function Page() {
         translateY: [-20, 0],
         easing: 'easeOutExpo',
         duration: 500,
+        delay: 300
       })
       .add({
-        targets: '.button-animation',
+        targets: '.about',
         opacity: [0, 1],
         translateY: [-20, 0],
         easing: 'easeOutExpo',
         duration: 500,
-        delay: 200 // stagger buttons
+      })
+      .add({
+        targets: '.reads',
+        opacity: [0, 1],
+        translateY: [-20, 0],
+        easing: 'easeOutExpo',
+        duration: 500,
       });
   }, []);
 
-  const animateOut = () => {
+  const animateOutAbout = () => {
     anime.timeline({ loop: false })
       .add({
-        targets: '.text-animation, .button-animation',
+        targets: '.text-animation, .about, .reads',
         opacity: [1, 0],
         translateY: [0, -20],
         easing: 'easeOutExpo',
@@ -42,16 +49,20 @@ export default function Page() {
         <div className="text-8xl text-animation opacity-0">
           hi. i&apos;m swad.
         </div>
-        <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 mt-8 text-4xl font-mono button-animation opacity-0">
+        <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 mt-8 text-4xl font-mono">
           <Link href="/about">
-            <button className="bg-black-500 border-solid border-2 border-white text-white font-bold py-4 px-20 rounded hover:border-sky-500 hover:text-sky-500 transition" onClick={animateOut}>
+            <div className="about opacity-0">
+            <button className="bg-black-500 border-solid border-2 border-white text-white font-bold py-4 px-20 rounded hover:border-sky-500 hover:text-sky-500 transition" onClick={animateOutAbout}>
               about
             </button>
+            </div>
           </Link>
           <Link href="https://goodreads.com/svadrut" target="_blank">
-            <button className="bg-black-500 border-solid border-2 border-white text-white font-bold py-4 px-20 rounded hover:border-emerald-500 hover:text-emerald-500 transition" onClick={animateOut}>
+            <div className="reads opacity-0">
+            <button className="bg-black-500 border-solid border-2 border-white text-white font-bold py-4 px-20 rounded hover:border-emerald-500 hover:text-emerald-500 transition reads-button-animation">
               reads
             </button>
+            </div>
           </Link>
         </div>
       </div>

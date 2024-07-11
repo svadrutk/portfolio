@@ -13,6 +13,7 @@ const config: Config = {
         mono: ['var(--font-space-mono-bold)'],
         grotesk: ['var(--font-space-grotesk-bold)'],
       },
+
     },
   },
   plugins: [],

@@ -4,6 +4,7 @@ import { Document, Page, pdfjs } from 'react-pdf';
 import { IoArrowBack } from 'react-icons/io5';
 import anime from 'animejs';
 import 'core-js/features/promise/';
+import Link from "next/link";
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
 
@@ -92,7 +93,7 @@ export default function Resume() {
   }
 
   return (
-    <main className="min-h-screen px-8 pt-12 md:px-20 md:pt-20 overflow-none">
+    <main className="min-h-screen flex justify-center px-8 pt-12 md:px-20 md:pt-20">
       <button className={`top-4 left-2 text-center md:top-4 md:left-4 text-xl md:text-2xl lg:text-3xl absolute backButton ${isAnimationComplete ? '' : 'opacity-0'}`} onClick={handleBackClick} >
         <IoArrowBack />
       </button>
@@ -109,8 +110,7 @@ export default function Resume() {
             </p>
             <p className='text-xl md:text-2xl lg:text-3xl mb-6'>
               My interests are primarily in Machine Learning and Databases --
-              I’m currently building a model with my friends to predict player props
-              for Premier League matches.
+              I’m currently working on a <Link target="_blank" className="text-sky-500 underline" href="https://www.badgerpedia.net">better course catalog</Link> for UW-Madison students.
             </p>
             <p className='text-xl md:text-2xl lg:text-3xl mb-6'>
               If you’d like to chat, see my contact info below:
@@ -135,7 +135,7 @@ export default function Resume() {
           <p className="text-xl md:text-2xl lg:text-3xl text-center h-3/4 align-middle pdf-section">
           </p>
         ) : (
-          <div className="border rounded shadow-lg h-3/4 overflow-y-scroll pdf-section">
+          <div className="border rounded shadow-lg h-3/4 overflow-y-scroll pdf-section max-w-fit flex justify-center">
             <Document file="./resume.pdf" onLoadSuccess={onDocumentLoadSuccess}>
               <Page
                 pageNumber={pageNumber}

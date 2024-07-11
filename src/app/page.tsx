@@ -42,7 +42,7 @@ export default function Page() {
         <div className="text-8xl text-animation opacity-0">
           hi. i&apos;m swad.
         </div>
-        <div className="flex space-x-4 mt-8 text-4xl font-mono button-animation opacity-0">
+        <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 mt-8 text-4xl font-mono button-animation opacity-0">
           <Link href="/about">
             <button className="bg-black-500 border-solid border-2 border-white text-white font-bold py-4 px-20 rounded hover:border-sky-500 hover:text-sky-500 transition" onClick={animateOut}>
               about

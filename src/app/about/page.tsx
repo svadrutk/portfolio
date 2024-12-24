@@ -106,11 +106,7 @@ export default function Resume() {
             <p className="text-xl md:text-2xl lg:text-3xl mb-6">
               I’m a recent graduate from the University of Wisconsin-Madison
               majoring in Computer Science and Data Science. I’m currently
-              interning as an SWE @ Wayfair.
-            </p>
-            <p className='text-xl md:text-2xl lg:text-3xl mb-6'>
-              My interests are primarily in Machine Learning and Databases --
-              I’m currently working on a <Link target="_blank" className="text-sky-500 underline" href="https://www.badgerpedia.net">better course catalog</Link> for UW-Madison students.
+              an SWE @ Wayfair.
             </p>
             <p className='text-xl md:text-2xl lg:text-3xl mb-6'>
               If you’d like to chat, see my contact info below:

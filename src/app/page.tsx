@@ -66,14 +66,14 @@ export default function Page() {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-8 text-4xl font-mono w-full">
           <Link href="/about">
             <div className="about opacity-0">
-              <button className="w-full bg-black-500 border-solid border-2 border-white text-white font-bold py-4 px-6 rounded hover:border-sky-500 hover:text-sky-500 transition" onClick={animateOutAbout}>
+              <button className="w-full bg-black-500 border-solid border-2 border-white text-white font-bold py-4 px-6 rounded hover:border-pink-400 hover:text-pink-400 transition" onClick={animateOutAbout}>
                 about
               </button>
             </div>
           </Link>
           <Link href="https://goodreads.com/svadrut" target="_blank">
             <div className="reads opacity-0">
-              <button className="w-full bg-black-500 border-solid border-2 border-white text-white font-bold py-4 px-6 rounded hover:border-emerald-500 hover:text-emerald-500 transition reads-button-animation">
+              <button className="w-full bg-black-500 border-solid border-2 border-white text-white font-bold py-4 px-6 rounded hover:border-emerald-400 hover:text-emerald-400 transition reads-button-animation">
                 reads
               </button>
             </div>

@@ -36,13 +36,20 @@ export default function Page() {
         translateY: [-20, 0],
         easing: 'easeOutExpo',
         duration: 500,
+      })
+      .add({
+        targets: '.blog',
+        opacity: [0, 1],
+        translateY: [-20, 0],
+        easing: 'easeOutExpo',
+        duration: 500,
       });
   }, []);
 
   const animateOutAbout = () => {
     anime.timeline({ loop: false })
       .add({
-        targets: '.text-animation, .about, .reads, .mixes',
+        targets: '.text-animation, .about, .reads, .mixes, .blog',
         opacity: [1, 0],
         translateY: [0, -20],
         easing: 'easeOutExpo',
@@ -56,25 +63,32 @@ export default function Page() {
         <div className="text-8xl text-animation opacity-0">
           hi. i&apos;m swad.
         </div>
-        <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 mt-8 text-4xl font-mono">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-8 text-4xl font-mono w-full">
           <Link href="/about">
             <div className="about opacity-0">
-              <button className="bg-black-500 border-solid border-2 border-white text-white font-bold py-4 px-20 rounded hover:border-sky-500 hover:text-sky-500 transition" onClick={animateOutAbout}>
+              <button className="w-full bg-black-500 border-solid border-2 border-white text-white font-bold py-4 px-6 rounded hover:border-sky-500 hover:text-sky-500 transition" onClick={animateOutAbout}>
                 about
               </button>
             </div>
           </Link>
           <Link href="https://goodreads.com/svadrut" target="_blank">
             <div className="reads opacity-0">
-              <button className="bg-black-500 border-solid border-2 border-white text-white font-bold py-4 px-20 rounded hover:border-emerald-500 hover:text-emerald-500 transition reads-button-animation">
+              <button className="w-full bg-black-500 border-solid border-2 border-white text-white font-bold py-4 px-6 rounded hover:border-emerald-500 hover:text-emerald-500 transition reads-button-animation">
                 reads
               </button>
             </div>
           </Link>
           <Link href="https://on.soundcloud.com/fNMfP5rmv8u5T1qC7" target="_blank">
             <div className="mixes opacity-0">
-              <button className="bg-black-500 border-solid border-2 border-white text-white font-bold py-4 px-20 rounded hover:border-orange-500 hover:text-orange-500 transition mixes-button-animation">
+              <button className="w-full bg-black-500 border-solid border-2 border-white text-white font-bold py-4 px-6 rounded hover:border-orange-500 hover:text-orange-500 transition mixes-button-animation">
                 mixes
+              </button>
+            </div>
+          </Link>
+          <Link href="/blog">
+            <div className="blog opacity-0">
+              <button className="w-full bg-black-500 border-solid border-2 border-white text-white font-bold py-4 px-6 rounded hover:border-purple-500 hover:text-purple-500 transition blog-button-animation">
+                blog
               </button>
             </div>
           </Link>

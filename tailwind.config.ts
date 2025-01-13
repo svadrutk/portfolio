@@ -12,6 +12,7 @@ const config: Config = {
         sans: ['var(--font-inter)'],
         mono: ['var(--font-space-mono-bold)'],
         grotesk: ['var(--font-space-grotesk-bold)'],
+        groteskRegular: ['var(--font-space-grotesk-regular)'],
       },
 
     },

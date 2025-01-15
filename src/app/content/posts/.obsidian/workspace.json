@@ -23,12 +23,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Welcome.md",
+                "file": "post_1.md",
                 "mode": "source",
                 "source": true
               },
               "icon": "lucide-file",
-              "title": "Welcome"
+              "title": "post_1"
             }
           }
         ],
@@ -175,8 +175,8 @@
   },
   "active": "7e99f100be0c322e",
   "lastOpenFiles": [
-    "post_1.md",
     "Welcome.md",
+    "post_1.md",
     "Health Plan.md",
     "2025 Goals.md",
     "Shopping List for Apartment.md",

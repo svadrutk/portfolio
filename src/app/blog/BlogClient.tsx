@@ -25,7 +25,6 @@ export default function BlogClient({ posts }: BlogClientProps) {
     });
   }, []);
 
-  console.log(isMobile);
 
   {/* Check size of screen */}
   return (
@@ -65,14 +64,14 @@ export default function BlogClient({ posts }: BlogClientProps) {
           {/* Render button conditionally based on mobile */}
           {isMobile && (
             <button
-              className="mt-8 px-4 py-2 border-2 border-slate-500 text-white  transition shadow-custom"
-              onClick={() => setSelectedPost(null)} // Go back to the titles column
-            >
-             { /* Render the back button */}
-             <FaArrowLeft className="inline-block text-slate-500" />
-
-            
-            </button>
+            className="mt-8 px-4 py-2 border-2 text-white transition shadow-[0_0_10px_2px_white]"
+            onClick={() => setSelectedPost(null)} // Go back to the titles column
+          >
+            { /* Render the back button */}
+            <FaArrowLeft className="inline-block " />
+          </button>
+          
+          
           )}
           
         </div>

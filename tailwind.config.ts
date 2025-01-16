@@ -14,10 +14,11 @@ const config: Config = {
         grotesk: ['var(--font-space-grotesk-bold)'],
         groteskRegular: ['var(--font-space-grotesk-regular)'],
       },
-      boxShadow: {
-        'custom': `
-          3px 3px rgb(0, 147, 187)
-        `,
+      dropShadow: {
+        glow: [
+          "0 0px 20px rgba(255,255, 255, 0.35)",
+          "0 0px 65px rgba(255, 255,255, 0.2)"
+        ]
       },
     },
   },

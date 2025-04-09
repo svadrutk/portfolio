@@ -51,7 +51,7 @@ export default function Home() {
   const emailLine = "contact me at kukunoorusvadrut [at] gmail [dot] com"
   const linkedinText = "linkedin"
   const githubText = "github"
-  const resumeText = "resume"
+  const resumeText = "resumé"
 
   const totalCharacters = firstLine.length + campusfyText.length + restFirstLine.length + 
     emailLine.length + linkedinText.length + githubText.length + resumeText.length

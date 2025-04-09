@@ -1,14 +1,18 @@
 import type { Metadata } from "next";
 import { Geist_Mono } from "next/font/google";
 import "./globals.css";
+import KursorComponent from "./components/KursorComponent";
 
 const geistMono = Geist_Mono({
   subsets: ['latin'],
 });
 
 export const metadata: Metadata = {
-  title: "swad's website",
-  description: "Personal website of Svadrut Kukunooru",
+  title: "Svadrut Kukunooru",
+  description: "Svadrut Kukunooru's Portfolio",
+  icons: {
+    icon: '/cat1.gif',
+  },
 };
 
 export default function RootLayout({
@@ -18,7 +22,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={geistMono.className}>{children}</body>
+      <body className={geistMono.className}>
+        <KursorComponent />
+        {children}
+      </body>
     </html>
   );
 }

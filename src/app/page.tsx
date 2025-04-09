@@ -9,7 +9,7 @@ const AnimatedCharacters = ({ text, totalCharacters, startIndex = 0 }: { text: s
   const stepDelay = ANIMATION_DURATION / totalCharacters
   
   return (
-    <span style={{ whiteSpace: 'pre' }}>
+    <span>
       {characters.map((char, index) => (
         <motion.span
           key={index}
@@ -50,19 +50,18 @@ export default function Home() {
   const restFirstLine = ". swe @ wayfair."
   const emailLine = "contact me at kukunoorusvadrut [at] gmail [dot] com"
   const linkedinText = "linkedin"
-  const separator = " | "
   const githubText = "github"
   const resumeText = "resume"
 
   const totalCharacters = firstLine.length + campusfyText.length + restFirstLine.length + 
-    emailLine.length + linkedinText.length + separator.length * 2 + githubText.length + resumeText.length
+    emailLine.length + linkedinText.length + githubText.length + resumeText.length
 
   let currentIndex = 0
 
   return (
     <main className="min-h-screen flex items-center justify-center">
-      <div className="w-full px-5 text-center">
-        <p className="mb-4">
+      <div className="w-full px-5 text-center mx-auto">
+        <p className="mb-4 text-base sm:text-lg">
           <AnimatedCharacters 
             text={firstLine} 
             totalCharacters={totalCharacters} 
@@ -91,7 +90,7 @@ export default function Home() {
             )
           })()}
         </p>
-        <p className="mb-6">
+        <p className="mb-6 text-base sm:text-lg">
           {(() => {
             currentIndex += restFirstLine.length
             return (
@@ -103,7 +102,7 @@ export default function Home() {
             )
           })()}
         </p>
-        <div className="flex justify-center items-center">
+        <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
           {(() => {
             currentIndex += emailLine.length
             return (
@@ -116,20 +115,8 @@ export default function Home() {
               />
             )
           })()}
-          <span className="mx-4 text-gray-400">
-            {(() => {
-              currentIndex += linkedinText.length
-              return (
-                <AnimatedCharacters 
-                  text={separator} 
-                  totalCharacters={totalCharacters} 
-                  startIndex={currentIndex} 
-                />
-              )
-            })()}
-          </span>
           {(() => {
-            currentIndex += separator.length
+            currentIndex += linkedinText.length
             return (
               <AnimatedLink
                 href="https://github.com/svadrutk"
@@ -140,20 +127,8 @@ export default function Home() {
               />
             )
           })()}
-          <span className="mx-4 text-gray-400">
-            {(() => {
-              currentIndex += githubText.length
-              return (
-                <AnimatedCharacters 
-                  text={separator} 
-                  totalCharacters={totalCharacters} 
-                  startIndex={currentIndex} 
-                />
-              )
-            })()}
-          </span>
           {(() => {
-            currentIndex += separator.length
+            currentIndex += githubText.length
             return (
               <AnimatedLink
                 href="/resume.pdf"

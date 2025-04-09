@@ -1,99 +1,171 @@
-'use client';
-import React, { useEffect } from "react";
-import Link from "next/link";
-import anime from "animejs";
-import 'core-js/features/promise'; // Example import for Promise polyfill
+'use client'
+import Link from 'next/link'
+import { motion } from 'framer-motion'
 
-export default function Page() {
-  useEffect(() => {
-    // Animate text and buttons sequentially
-    anime.timeline({ loop: false })
-      .add({
-        targets: '.text-animation',
-        opacity: [0, 1],
-        translateY: [-20, 0],
-        easing: 'easeOutExpo',
-        duration: 500,
-        delay: 300
-      })
-      .add({
-        targets: '.about',
-        opacity: [0, 1],
-        translateY: [-20, 0],
-        easing: 'easeOutExpo',
-        duration: 500,
-      })
-      .add({
-        targets: '.reads',
-        opacity: [0, 1],
-        translateY: [-20, 0],
-        easing: 'easeOutExpo',
-        duration: 500,
-      })
-      .add({
-        targets: '.mixes',
-        opacity: [0, 1],
-        translateY: [-20, 0],
-        easing: 'easeOutExpo',
-        duration: 500,
-      })
-      .add({
-        targets: '.blog',
-        opacity: [0, 1],
-        translateY: [-20, 0],
-        easing: 'easeOutExpo',
-        duration: 500,
-      });
-  }, []);
+const ANIMATION_DURATION = 1 // total duration in seconds
 
-  const animateOutAbout = () => {
-    anime.timeline({ loop: false })
-      .add({
-        targets: '.text-animation, .about, .reads, .mixes, .blog',
-        opacity: [1, 0],
-        translateY: [0, -20],
-        easing: 'easeOutExpo',
-        duration: 200,
-      });
-  };
+const AnimatedCharacters = ({ text, totalCharacters, startIndex = 0 }: { text: string, totalCharacters: number, startIndex?: number }) => {
+  const characters = text.split("")
+  const stepDelay = ANIMATION_DURATION / totalCharacters
+  
+  return (
+    <span style={{ whiteSpace: 'pre' }}>
+      {characters.map((char, index) => (
+        <motion.span
+          key={index}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{
+            duration: 0.1,
+            delay: (startIndex + index) * stepDelay,
+          }}
+        >
+          {char}
+        </motion.span>
+      ))}
+    </span>
+  )
+}
+
+const AnimatedLink = ({ href, text, className, totalCharacters, startIndex }: { 
+  href: string, 
+  text: string, 
+  className?: string,
+  totalCharacters: number,
+  startIndex: number 
+}) => (
+  <Link 
+    href={href} 
+    className={className}
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    <AnimatedCharacters text={text} totalCharacters={totalCharacters} startIndex={startIndex} />
+  </Link>
+)
+
+export default function Home() {
+  const firstLine = "hi. i'm swad. building "
+  const campusfyText = "campusfy"
+  const restFirstLine = ". swe @ wayfair."
+  const emailLine = "contact me at kukunoorusvadrut [at] gmail [dot] com"
+  const linkedinText = "linkedin"
+  const separator = " | "
+  const githubText = "github"
+  const resumeText = "resume"
+
+  const totalCharacters = firstLine.length + campusfyText.length + restFirstLine.length + 
+    emailLine.length + linkedinText.length + separator.length * 2 + githubText.length + resumeText.length
+
+  let currentIndex = 0
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center p-24">
-      <div className="flex flex-col items-center justify-center h-full font-grotesk">
-        <div className="text-8xl text-animation opacity-0">
-          hi. i&apos;m swad.
-        </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-8 text-4xl font-mono w-full">
-          <Link href="/about">
-            <div className="about opacity-0">
-              <button className="w-full bg-black-500 border-solid border-2 border-white text-white font-bold py-4 px-6 rounded hover:border-pink-400 hover:text-pink-400 transition" onClick={animateOutAbout}>
-                about
-              </button>
-            </div>
-          </Link>
-          <Link href="https://goodreads.com/svadrut" target="_blank">
-            <div className="reads opacity-0">
-              <button className="w-full bg-black-500 border-solid border-2 border-white text-white font-bold py-4 px-6 rounded hover:border-emerald-400 hover:text-emerald-400 transition reads-button-animation">
-                reads
-              </button>
-            </div>
-          </Link>
-          <Link href="https://on.soundcloud.com/fNMfP5rmv8u5T1qC7" target="_blank">
-            <div className="mixes opacity-0">
-              <button className="w-full bg-black-500 border-solid border-2 border-white text-white font-bold py-4 px-6 rounded hover:border-orange-500 hover:text-orange-500 transition mixes-button-animation">
-                mixes
-              </button>
-            </div>
-          </Link>
-          <Link href="/blog">
-            <div className="blog opacity-0">
-              <button className="w-full bg-black-500 border-solid border-2 border-white text-white font-bold py-4 px-6 rounded hover:border-purple-500 hover:text-purple-500 transition blog-button-animation">
-                blog
-              </button>
-            </div>
-          </Link>
+    <main className="min-h-screen flex items-center justify-center">
+      <div className="w-full px-5 text-center">
+        <p className="mb-4">
+          <AnimatedCharacters 
+            text={firstLine} 
+            totalCharacters={totalCharacters} 
+            startIndex={currentIndex} 
+          />
+          {(() => {
+            currentIndex += firstLine.length
+            return (
+              <AnimatedLink 
+                href="https://campusfy.app" 
+                text={campusfyText}
+                className="underline hover:opacity-70"
+                totalCharacters={totalCharacters}
+                startIndex={currentIndex}
+              />
+            )
+          })()}
+          {(() => {
+            currentIndex += campusfyText.length
+            return (
+              <AnimatedCharacters 
+                text={restFirstLine} 
+                totalCharacters={totalCharacters} 
+                startIndex={currentIndex} 
+              />
+            )
+          })()}
+        </p>
+        <p className="mb-6">
+          {(() => {
+            currentIndex += restFirstLine.length
+            return (
+              <AnimatedCharacters 
+                text={emailLine} 
+                totalCharacters={totalCharacters} 
+                startIndex={currentIndex} 
+              />
+            )
+          })()}
+        </p>
+        <div className="flex justify-center items-center">
+          {(() => {
+            currentIndex += emailLine.length
+            return (
+              <AnimatedLink
+                href="https://linkedin.com/in/svadrut"
+                text={linkedinText}
+                className="underline hover:opacity-70"
+                totalCharacters={totalCharacters}
+                startIndex={currentIndex}
+              />
+            )
+          })()}
+          <span className="mx-4 text-gray-400">
+            {(() => {
+              currentIndex += linkedinText.length
+              return (
+                <AnimatedCharacters 
+                  text={separator} 
+                  totalCharacters={totalCharacters} 
+                  startIndex={currentIndex} 
+                />
+              )
+            })()}
+          </span>
+          {(() => {
+            currentIndex += separator.length
+            return (
+              <AnimatedLink
+                href="https://github.com/svadrutk"
+                text={githubText}
+                className="underline hover:opacity-70"
+                totalCharacters={totalCharacters}
+                startIndex={currentIndex}
+              />
+            )
+          })()}
+          <span className="mx-4 text-gray-400">
+            {(() => {
+              currentIndex += githubText.length
+              return (
+                <AnimatedCharacters 
+                  text={separator} 
+                  totalCharacters={totalCharacters} 
+                  startIndex={currentIndex} 
+                />
+              )
+            })()}
+          </span>
+          {(() => {
+            currentIndex += separator.length
+            return (
+              <AnimatedLink
+                href="/resume.pdf"
+                text={resumeText}
+                className="underline hover:opacity-70"
+                totalCharacters={totalCharacters}
+                startIndex={currentIndex}
+              />
+            )
+          })()}
         </div>
       </div>
     </main>
-  );
+  )
 }

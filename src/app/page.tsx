@@ -60,7 +60,7 @@ export default function Home() {
 
   return (
     <main className="min-h-screen flex items-center justify-center">
-      <div className="w-full px-5 text-center mx-auto">
+      <div className="w-[80%] px-5 text-center mx-auto">
         <p className="mb-4 text-base sm:text-lg">
           <AnimatedCharacters 
             text={firstLine} 

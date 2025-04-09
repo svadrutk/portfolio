@@ -7,7 +7,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "svadrut",
+  title: "swad's website",
   description: "Personal website of Svadrut Kukunooru",
 };
 

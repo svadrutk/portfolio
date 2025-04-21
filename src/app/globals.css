@@ -1,13 +1,23 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-rgb: 255, 255, 255;
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-serif: var(--font-goudy-bookletter);
+  --font-mono: var(--font-space-mono);
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: rgb(var(--background-rgb));
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-goudy-bookletter);
+}
+
+.font-\[\'Goudy_Bookletter_1911\'\] {
+  letter-spacing: 1px;
 }

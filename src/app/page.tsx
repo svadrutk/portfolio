@@ -1,146 +1,69 @@
-'use client'
-import Link from 'next/link'
-import { motion } from 'framer-motion'
-
-const ANIMATION_DURATION = 1 // total duration in seconds
-
-const AnimatedCharacters = ({ text, totalCharacters, startIndex = 0 }: { text: string, totalCharacters: number, startIndex?: number }) => {
-  const characters = text.split("")
-  const stepDelay = ANIMATION_DURATION / totalCharacters
-  
-  return (
-    <span>
-      {characters.map((char, index) => (
-        <motion.span
-          key={index}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{
-            duration: 0.1,
-            delay: (startIndex + index) * stepDelay,
-          }}
-        >
-          {char}
-        </motion.span>
-      ))}
-    </span>
-  )
-}
-
-const AnimatedLink = ({ href, text, className, totalCharacters, startIndex }: { 
-  href: string, 
-  text: string, 
-  className?: string,
-  totalCharacters: number,
-  startIndex: number 
-}) => (
-  <Link 
-    href={href} 
-    className={className}
-    target="_blank"
-    rel="noopener noreferrer"
-  >
-    <AnimatedCharacters text={text} totalCharacters={totalCharacters} startIndex={startIndex} />
-  </Link>
-)
+import { ArrowUpRight } from 'lucide-react';
+import AnimatedSection from '@/components/AnimatedSection';
 
 export default function Home() {
-  const firstLine = "hi. i'm swad. building "
-  const campusfyText = "campusfy"
-  const restFirstLine = ". swe @ wayfair."
-  const emailLine = "contact me at kukunoorusvadrut [at] gmail [dot] com"
-  const linkedinText = "linkedin"
-  const githubText = "github"
-  const resumeText = "resumé"
-
-  const totalCharacters = firstLine.length + campusfyText.length + restFirstLine.length + 
-    emailLine.length + linkedinText.length + githubText.length + resumeText.length
-
-  let currentIndex = 0
-
   return (
-    <main className="min-h-screen flex items-center justify-center">
-      <div className="w-[80%] px-5 text-center mx-auto">
-        <p className="mb-4 text-base sm:text-lg">
-          <AnimatedCharacters 
-            text={firstLine} 
-            totalCharacters={totalCharacters} 
-            startIndex={currentIndex} 
-          />
-          {(() => {
-            currentIndex += firstLine.length
-            return (
-              <AnimatedLink 
-                href="https://campusfy.app" 
-                text={campusfyText}
-                className="underline hover:opacity-70"
-                totalCharacters={totalCharacters}
-                startIndex={currentIndex}
-              />
-            )
-          })()}
-          {(() => {
-            currentIndex += campusfyText.length
-            return (
-              <AnimatedCharacters 
-                text={restFirstLine} 
-                totalCharacters={totalCharacters} 
-                startIndex={currentIndex} 
-              />
-            )
-          })()}
-        </p>
-        <p className="mb-6 text-base sm:text-lg">
-          {(() => {
-            currentIndex += restFirstLine.length
-            return (
-              <AnimatedCharacters 
-                text={emailLine} 
-                totalCharacters={totalCharacters} 
-                startIndex={currentIndex} 
-              />
-            )
-          })()}
-        </p>
-        <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
-          {(() => {
-            currentIndex += emailLine.length
-            return (
-              <AnimatedLink
-                href="https://linkedin.com/in/svadrut"
-                text={linkedinText}
-                className="underline hover:opacity-70"
-                totalCharacters={totalCharacters}
-                startIndex={currentIndex}
-              />
-            )
-          })()}
-          {(() => {
-            currentIndex += linkedinText.length
-            return (
-              <AnimatedLink
-                href="https://github.com/svadrutk"
-                text={githubText}
-                className="underline hover:opacity-70"
-                totalCharacters={totalCharacters}
-                startIndex={currentIndex}
-              />
-            )
-          })()}
-          {(() => {
-            currentIndex += githubText.length
-            return (
-              <AnimatedLink
-                href="/resume.pdf"
-                text={resumeText}
-                className="underline hover:opacity-70"
-                totalCharacters={totalCharacters}
-                startIndex={currentIndex}
-              />
-            )
-          })()}
+    <div className="min-h-screen bg-white flex items-center justify-center">
+      <div className="w-full max-w-2xl mx-auto px-6 md:px-4">
+        <div className="grid grid-rows-2 gap-8 md:gap-5 font-serif py-8 md:py-0">
+          {/* First row - full width */}
+          <AnimatedSection delay={0.2} className="border-b border-gray-200">
+            <div className="flex justify-between h-6 mb-4">
+              <h1 className="text-3xl leading-6">Swad's Home</h1>
+              <span className="text-xs font-mono text-gray-400 leading-6">[1]</span>
+            </div>
+            <p className="text-md mb-5">I'm a software engineer who loves building products that make people's lives easier.
+I studied Computer Science and Data Science at UW–Madison, work at Wayfair improving internal tools, and lead platform development on Campusfy — a platform helping students discover the right classes and plan their degrees with confidence. I care about fast feedback loops, intuitive user experiences, and turning scrappy ideas into real, working software.</p>
+          </AnimatedSection>
+          
+          {/* Second row - split into two columns */}
+          <AnimatedSection delay={0.4} className="grid md:grid-cols-2 sm:grid-cols-1 gap-5 relative">
+            {/* Left column */}
+            <AnimatedSection delay={0.6} className="flex flex-col">
+              <div className="flex justify-between h-6">
+                <h2 className="text-sm font-mono leading-6">LINKS</h2>
+                <span className="text-xs font-mono text-gray-400 leading-6">[2]</span>
+              </div>
+              <div className="mt-2">
+                <a href="https://linkedin.com/in/svadrut" target="_blank" rel="noopener noreferrer" className="flex justify-between items-center group">
+                  <span className="font-['Goudy_Bookletter_1911']">Linkedin</span>
+                  <ArrowUpRight className="w-4 h-4 text-gray-400 group-hover:text-gray-600 transition-colors" />
+                </a>
+                <a href="https://campusfy.app" target="_blank" rel="noopener noreferrer" className="flex justify-between items-center group">
+                  <span className="font-['Goudy_Bookletter_1911']">Campusfy</span>
+                  <ArrowUpRight className="w-4 h-4 text-gray-400 group-hover:text-gray-600 transition-colors" />
+                </a>
+                <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" className="flex justify-between items-center group">
+                  <span className="font-['Goudy_Bookletter_1911']">Resumé</span>
+                  <ArrowUpRight className="w-4 h-4 text-gray-400 group-hover:text-gray-600 transition-colors" />
+                </a>
+              </div>
+            </AnimatedSection>
+            
+            {/* Right column */}
+            <AnimatedSection delay={0.8} className="flex flex-col">
+              <div className="flex justify-between h-6">
+                <h2 className="text-sm font-mono leading-6">TEAMS</h2>
+                <span className="text-xs font-mono text-gray-400 leading-6">[3]</span>
+              </div>
+              <div className="mt-2">
+                <div className="flex justify-between h-6 items-center">
+                  <span className="font-['Goudy_Bookletter_1911'] leading-6">Campusfy <span className="text-sm font-mono leading-6">(2025-)</span></span>
+                  <div className="w-2 h-2 bg-red-500 border border-black border-1"></div>
+                </div>
+                <div className="flex justify-between h-6 items-center">
+                  <span className="font-['Goudy_Bookletter_1911']">Wayfair <span className="text-sm font-mono leading-6">(2024-)</span></span>
+                  <div className="w-2 h-2 bg-purple-500 border border-black border-1"></div>
+                </div>
+                <div className="flex justify-between h-6 items-center">
+                  <span className="font-['Goudy_Bookletter_1911'] leading-6">SkyWater Technology <span className="text-sm font-mono leading-6">(2023)</span></span>
+                  <div className="w-2 h-2 bg-lime-600 border border-black border-1"></div>
+                </div>
+              </div>
+            </AnimatedSection>
+          </AnimatedSection>
         </div>
       </div>
-    </main>
-  )
+    </div>
+  );
 }

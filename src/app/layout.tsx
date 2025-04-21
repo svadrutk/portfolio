@@ -1,29 +1,43 @@
 import type { Metadata } from "next";
-import { Geist_Mono } from "next/font/google";
+import { Space_Mono } from "next/font/google";
+import { Goudy_Bookletter_1911 } from "next/font/google";
 import "./globals.css";
-import KursorComponent from "./components/KursorComponent";
 
-const geistMono = Geist_Mono({
-  subsets: ['latin'],
+const goudyBookletter = Goudy_Bookletter_1911({
+  variable: "--font-goudy-bookletter",
+  weight: "400",
+  subsets: ["latin"],
+});
+
+const spaceMono = Space_Mono({
+  variable: "--font-space-mono",
+  weight: ["400", "700"],
+  subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
-  title: "Svadrut Kukunooru",
-  description: "Svadrut Kukunooru's Portfolio",
+  title: "Swad's Home",
+  description: "Software engineer who loves building products that make people's lives easier.",
   icons: {
-    icon: '/cat1.gif',
-  },
+    icon: [
+      {
+        url: '/favicon.gif',
+        type: 'image/gif',
+      }
+    ]
+  }
 };
 
 export default function RootLayout({
   children,
-}: {
-  children: React.ReactNode
-}) {
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
   return (
     <html lang="en">
-      <body className={geistMono.className}>
-        <KursorComponent />
+      <body
+        className={`${goudyBookletter.variable} ${spaceMono.variable} antialiased`}
+      >
         {children}
       </body>
     </html>

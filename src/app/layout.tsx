@@ -18,8 +18,8 @@ const spaceMono = Space_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Swad's Home",
-  description: "Software engineer who loves building products that make people's lives easier.",
+  title: "Swad's Blog",
+  description: "Book reviews, thoughts on life, and other random stuff.",
   icons: {
     icon: [
       {

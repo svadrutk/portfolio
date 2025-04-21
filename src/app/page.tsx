@@ -38,6 +38,10 @@ I currently work on the Knowledge Management team at Wayfair, designing and buil
                   <span className="font-[&apos;Goudy_Bookletter_1911&apos;]">Resumé</span>
                   <ArrowUpRight className="w-4 h-4 text-gray-400 group-hover:text-gray-600 transition-colors" />
                 </a>
+                <a href="/blog" target="_blank" rel="noopener noreferrer" className="flex justify-between items-center group">
+                  <span className="font-[&apos;Goudy_Bookletter_1911&apos;]">Blog</span>
+                  <ArrowUpRight className="w-4 h-4 text-gray-400 group-hover:text-gray-600 transition-colors" />
+                </a>
               </div>
             </AnimatedSection>
             

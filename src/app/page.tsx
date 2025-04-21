@@ -9,10 +9,10 @@ export default function Home() {
           {/* First row - full width */}
           <AnimatedSection delay={0.2} className="border-b border-gray-200">
             <div className="flex justify-between h-6 mb-4">
-              <h1 className="text-3xl leading-6">Swad's Home</h1>
+              <h1 className="text-3xl leading-6">Swad&apos;s Home</h1>
               <span className="text-xs font-mono text-gray-400 leading-6">[1]</span>
             </div>
-            <p className="text-md mb-5">I'm a software engineer who loves building products that make people's lives easier.
+            <p className="text-md mb-5">I&apos;m a software engineer who loves building products that make people&apos;s lives easier.
 I studied Computer Science and Data Science at UW–Madison, work at Wayfair improving internal tools, and lead platform development on Campusfy — a platform helping students discover the right classes and plan their degrees with confidence. I care about fast feedback loops, intuitive user experiences, and turning scrappy ideas into real, working software.</p>
           </AnimatedSection>
           
@@ -26,15 +26,15 @@ I studied Computer Science and Data Science at UW–Madison, work at Wayfair imp
               </div>
               <div className="mt-2">
                 <a href="https://linkedin.com/in/svadrut" target="_blank" rel="noopener noreferrer" className="flex justify-between items-center group">
-                  <span className="font-['Goudy_Bookletter_1911']">Linkedin</span>
+                  <span className="font-[&apos;Goudy_Bookletter_1911&apos;]">Linkedin</span>
                   <ArrowUpRight className="w-4 h-4 text-gray-400 group-hover:text-gray-600 transition-colors" />
                 </a>
                 <a href="https://campusfy.app" target="_blank" rel="noopener noreferrer" className="flex justify-between items-center group">
-                  <span className="font-['Goudy_Bookletter_1911']">Campusfy</span>
+                  <span className="font-[&apos;Goudy_Bookletter_1911&apos;]">Campusfy</span>
                   <ArrowUpRight className="w-4 h-4 text-gray-400 group-hover:text-gray-600 transition-colors" />
                 </a>
                 <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" className="flex justify-between items-center group">
-                  <span className="font-['Goudy_Bookletter_1911']">Resumé</span>
+                  <span className="font-[&apos;Goudy_Bookletter_1911&apos;]">Resumé</span>
                   <ArrowUpRight className="w-4 h-4 text-gray-400 group-hover:text-gray-600 transition-colors" />
                 </a>
               </div>
@@ -48,15 +48,15 @@ I studied Computer Science and Data Science at UW–Madison, work at Wayfair imp
               </div>
               <div className="mt-2">
                 <div className="flex justify-between h-6 items-center">
-                  <span className="font-['Goudy_Bookletter_1911'] leading-6">Campusfy <span className="text-sm font-mono leading-6">(2025-)</span></span>
+                  <span className="font-[&apos;Goudy_Bookletter_1911&apos;] leading-6">Campusfy <span className="text-sm font-mono leading-6">(2025-)</span></span>
                   <div className="w-2 h-2 bg-red-500 border border-black border-1"></div>
                 </div>
                 <div className="flex justify-between h-6 items-center">
-                  <span className="font-['Goudy_Bookletter_1911']">Wayfair <span className="text-sm font-mono leading-6">(2024-)</span></span>
+                  <span className="font-[&apos;Goudy_Bookletter_1911&apos;]">Wayfair <span className="text-sm font-mono leading-6">(2024-)</span></span>
                   <div className="w-2 h-2 bg-purple-500 border border-black border-1"></div>
                 </div>
                 <div className="flex justify-between h-6 items-center">
-                  <span className="font-['Goudy_Bookletter_1911'] leading-6">SkyWater Technology <span className="text-sm font-mono leading-6">(2023)</span></span>
+                  <span className="font-[&apos;Goudy_Bookletter_1911&apos;] leading-6">SkyWater Technology <span className="text-sm font-mono leading-6">(2023)</span></span>
                   <div className="w-2 h-2 bg-lime-600 border border-black border-1"></div>
                 </div>
               </div>

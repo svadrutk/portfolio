@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Space_Mono } from "next/font/google";
 import { Goudy_Bookletter_1911 } from "next/font/google";
+import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 import "./globals.css";
 
 const goudyBookletter = Goudy_Bookletter_1911({
@@ -39,6 +41,8 @@ export default function RootLayout({
         className={`${goudyBookletter.variable} ${spaceMono.variable} antialiased`}
       >
         {children}
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );

@@ -12,8 +12,9 @@ export default function Home() {
               <h1 className="text-3xl leading-6">Swad&apos;s Home</h1>
               <span className="text-xs font-mono text-gray-400 leading-6">[1]</span>
             </div>
-            <p className="text-md mb-5">I&apos;m a software engineer who loves building products that make people&apos;s lives easier.
-I studied Computer Science and Data Science at UW–Madison, work at Wayfair improving internal tools, and co-founded Campusfy — a platform helping students discover the right classes and plan their degrees with confidence. I care about fast feedback loops, intuitive user experiences, and turning scrappy ideas into real, working software.</p>
+            <p className="text-md mb-5">I&apos;m a software engineer and entrepreneur who loves building products that make people&apos;s lives easier.
+I studied Computer Science and Data Science at UW–Madison and co-founded Campusfy — a platform helping students discover the right classes and plan their degrees with confidence. I care about fast feedback loops, intuitive user experiences, and turning scrappy ideas into real, working software.
+I currently work on the Knowledge Management team at Wayfair, designing and building AI-powered tools that help teams find and share information more effectively.</p>
           </AnimatedSection>
           
           {/* Second row - split into two columns */}

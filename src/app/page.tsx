@@ -13,7 +13,7 @@ export default function Home() {
               <span className="text-xs font-mono text-gray-400 leading-6">[1]</span>
             </div>
             <p className="text-md mb-5">I&apos;m a software engineer who loves building products that make people&apos;s lives easier.
-I studied Computer Science and Data Science at UW–Madison, work at Wayfair improving internal tools, and lead platform development on Campusfy — a platform helping students discover the right classes and plan their degrees with confidence. I care about fast feedback loops, intuitive user experiences, and turning scrappy ideas into real, working software.</p>
+I studied Computer Science and Data Science at UW–Madison, work at Wayfair improving internal tools, and co-founded Campusfy — a platform helping students discover the right classes and plan their degrees with confidence. I care about fast feedback loops, intuitive user experiences, and turning scrappy ideas into real, working software.</p>
           </AnimatedSection>
           
           {/* Second row - split into two columns */}

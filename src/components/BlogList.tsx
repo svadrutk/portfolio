@@ -46,7 +46,7 @@ export default function BlogList({ onSelectPost, selectedSlug }: BlogListProps) 
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.3 }}
             className={`cursor-pointer p-4 min-w-full md:min-w-0 snap-center ${
-              selectedSlug === post.slug ? 'text-black' : 'text-gray-500'
+              selectedSlug === post.slug ? 'text-black border-r-2 border-black md:border-r-2' : 'text-gray-500'
             }`}
             onClick={() => onSelectPost(post.slug)}
           >

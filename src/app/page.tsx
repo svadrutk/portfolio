@@ -1,7 +1,21 @@
+'use client';
+
 import { ArrowUpRight } from 'lucide-react';
 import AnimatedSection from '@/components/AnimatedSection';
+import { useRouter } from 'next/navigation';
+import { useTransition } from 'react';
 
 export default function Home() {
+  const router = useRouter();
+  const [isPending, startTransition] = useTransition();
+
+  const handleBlogClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    startTransition(() => {
+      router.push('/blog');
+    });
+  };
+
   return (
     <div className="min-h-screen bg-white flex items-center justify-center">
       <div className="w-full max-w-2xl mx-auto px-6 md:px-4">
@@ -38,9 +52,9 @@ I currently work on the Knowledge Management team at Wayfair, designing and buil
                   <span className="font-[&apos;Goudy_Bookletter_1911&apos;]">Resumé</span>
                   <ArrowUpRight className="w-4 h-4 text-gray-400 group-hover:text-gray-600 transition-colors" />
                 </a>
-                <a href="/blog" rel="noopener noreferrer" className="flex justify-between items-center group">
-                  <span className="font-[&apos;Goudy_Bookletter_1911&apos;]">Blog</span>
-                  <ArrowUpRight className="w-4 h-4 text-gray-400 group-hover:text-gray-600 transition-colors" />
+                <a href="/blog" onClick={handleBlogClick} className="flex justify-between items-center group">
+                  <span className={`font-[&apos;Goudy_Bookletter_1911&apos;] ${isPending ? 'opacity-50' : ''} transition-opacity duration-200`}>Blog</span>
+                  <ArrowUpRight className={`w-4 h-4 text-gray-400 group-hover:text-gray-600 transition-all ${isPending ? 'opacity-50' : ''}`} />
                 </a>
               </div>
             </AnimatedSection>

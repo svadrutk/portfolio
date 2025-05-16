@@ -85,13 +85,19 @@ export default function NowPlaying() {
       </div>
       <div className="mt-2 flex items-start gap-4">
         {track.albumArtUrl && (
-          <div className="relative w-16 h-16 flex-shrink-0">
+          <div className="relative w-20 h-20 flex-shrink-0 flex items-center justify-center">
+            {/* Vinyl background */}
+            <div className={`absolute inset-0 rounded-full border-4 border-black shadow-lg ${track.isPlaying ? 'animate-spin-slow' : ''}`} />
+            {/* Album art as label */}
             <Image
               src={track.albumArtUrl}
               alt={`${track.title} album art`}
               fill
-              className="object-cover rounded-md"
+              className="object-cover rounded-full"
+              style={{ zIndex: 1 }}
             />
+            {/* Center dot */}
+            <div className="absolute left-1/2 top-1/2 w-3 h-3 bg-gray-200 border border-gray-400 rounded-full -translate-x-1/2 -translate-y-1/2 z-10" />
           </div>
         )}
         <div className="flex-1 min-w-0">

@@ -85,9 +85,9 @@ export default function NowPlaying() {
       </div>
       <div className="mt-2 flex items-start gap-4">
         {track.albumArtUrl && (
-          <div className="relative w-20 h-20 flex-shrink-0 flex items-center justify-center">
+          <div className={`relative w-20 h-20 flex-shrink-0 flex items-center justify-center ${track.isPlaying ? 'animate-spin-slow' : ''}`}>
             {/* Vinyl background */}
-            <div className={`absolute inset-0 rounded-full border-4 border-black shadow-lg ${track.isPlaying ? 'animate-spin-slow' : ''}`} />
+            <div className="absolute inset-0 rounded-full border-4 border-black shadow-lg" />
             {/* Album art as label */}
             <Image
               src={track.albumArtUrl}

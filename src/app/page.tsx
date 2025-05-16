@@ -5,6 +5,7 @@ import AnimatedSection from '@/components/AnimatedSection';
 import NowPlaying from '@/components/NowPlaying';
 import { useRouter } from 'next/navigation';
 import { useTransition } from 'react';
+import { AnimatePresence } from 'framer-motion';
 
 export default function Home() {
   const router = useRouter();
@@ -85,7 +86,9 @@ I currently work on the Knowledge Management team at Wayfair, designing and buil
 
           {/* Third row - Now Playing widget */}
           <AnimatedSection delay={1.0} className="border-t border-gray-200 pt-5">
-            <NowPlaying />
+            <AnimatePresence mode="wait">
+              <NowPlaying key={Math.random()} />
+            </AnimatePresence>
           </AnimatedSection>
         </div>
       </div>

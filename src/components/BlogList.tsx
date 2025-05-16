@@ -37,23 +37,25 @@ export default function BlogList({ onSelectPost, selectedSlug }: BlogListProps) 
   };
 
   return (
-    <div className="h-full flex flex-col justify-center">
-      <div className="flex md:flex-col md:space-y-0 md:space-x-0 snap-x snap-mandatory overflow-x-auto scrollbar-hide">
+    <div className="h-full">
+      <div className="flex flex-col space-y-4 pb-4">
         {posts.map((post) => (
           <motion.div
             key={post.slug}
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3 }}
-            className={`cursor-pointer p-4 min-w-full md:min-w-0 snap-center ${
-              selectedSlug === post.slug ? 'text-black border-r-2 border-black md:border-r-2' : 'text-gray-500'
+            className={`cursor-pointer p-4 rounded-lg hover:bg-gray-50 transition-colors ${
+              selectedSlug === post.slug 
+                ? 'bg-gray-50 border-l-4 border-black md:border-l-0 md:border-r-4' 
+                : 'text-gray-500'
             }`}
             onClick={() => onSelectPost(post.slug)}
           >
-            <h2 className="text-2xl font-light tracking-tight mb-2 text-left md:text-right">
+            <h2 className="text-xl md:text-2xl font-light tracking-tight mb-2">
               {post.title}
             </h2>
-            <div className="flex items-center gap-4 text-sm justify-start md:justify-end">
+            <div className="flex items-center gap-4 text-sm">
               <span>{formatDate(post.date)}</span>
               <span>•</span>
               <span>{post.readTime} min read</span>

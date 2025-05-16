@@ -2,6 +2,7 @@
 
 import { ArrowUpRight } from 'lucide-react';
 import AnimatedSection from '@/components/AnimatedSection';
+import NowPlaying from '@/components/NowPlaying';
 import { useRouter } from 'next/navigation';
 import { useTransition } from 'react';
 
@@ -19,7 +20,7 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-white flex items-center justify-center">
       <div className="w-full max-w-2xl mx-auto px-6 md:px-4">
-        <div className="grid grid-rows-2 gap-8 md:gap-5 font-serif py-8 md:py-0">
+        <div className="grid gap-5 font-serif py-8 md:py-0">
           {/* First row - full width */}
           <AnimatedSection delay={0.2} className="border-b border-gray-200">
             <div className="flex justify-between h-6 mb-4">
@@ -80,6 +81,11 @@ I currently work on the Knowledge Management team at Wayfair, designing and buil
                 </div>
               </div>
             </AnimatedSection>
+          </AnimatedSection>
+
+          {/* Third row - Now Playing widget */}
+          <AnimatedSection delay={1.0} className="border-t border-gray-200 pt-5">
+            <NowPlaying />
           </AnimatedSection>
         </div>
       </div>

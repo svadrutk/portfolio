@@ -62,22 +62,22 @@ I currently work on the Knowledge Management team at Wayfair, designing and buil
             
             {/* Right column */}
             <AnimatedSection delay={0.8} className="flex flex-col">
-              <div className="flex justify-between h-6">
+              <div className="flex justify-between h-6 items-center">
                 <h2 className="text-sm font-mono leading-6">TEAMS</h2>
                 <span className="text-xs font-mono text-gray-400 leading-6">[3]</span>
               </div>
               <div className="mt-2">
                 <div className="flex justify-between h-6 items-center">
                   <span className="font-[&apos;Goudy_Bookletter_1911&apos;] leading-6">Campusfy <span className="text-sm font-mono leading-6">(2025-)</span></span>
-                  <div className="w-2 h-2 bg-red-500 border border-black border-1"></div>
+                  <div className="w-2 h-2 bg-red-500 border border-black border-1 mr-1"></div>
                 </div>
                 <div className="flex justify-between h-6 items-center">
                   <span className="font-[&apos;Goudy_Bookletter_1911&apos;]">Wayfair <span className="text-sm font-mono leading-6">(2024-)</span></span>
-                  <div className="w-2 h-2 bg-purple-500 border border-black border-1"></div>
+                  <div className="w-2 h-2 bg-purple-500 border border-black border-1 mr-1"></div>
                 </div>
                 <div className="flex justify-between h-6 items-center">
                   <span className="font-[&apos;Goudy_Bookletter_1911&apos;] leading-6">SkyWater Technology <span className="text-sm font-mono leading-6">(2023)</span></span>
-                  <div className="w-2 h-2 bg-lime-600 border border-black border-1"></div>
+                  <div className="w-2 h-2 bg-lime-600 border border-black border-1 mr-1"></div>
                 </div>
               </div>
             </AnimatedSection>

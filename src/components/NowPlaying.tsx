@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Music, ExternalLink } from 'lucide-react';
 import AnimatedSection from './AnimatedSection';
 import Image from 'next/image';
@@ -21,6 +21,9 @@ export default function NowPlaying() {
   const [track, setTrack] = useState<Track | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [progress, setProgress] = useState(0);
+  const [visible, setVisible] = useState(false);
+  const [shouldRender, setShouldRender] = useState(false);
+  const fadeTimeout = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     const fetchTrack = async () => {
@@ -51,6 +54,20 @@ export default function NowPlaying() {
     return () => clearInterval(interval);
   }, []);
 
+  useEffect(() => {
+    if (track && track.isPlaying) {
+      setShouldRender(true);
+      setVisible(true);
+    } else if (shouldRender) {
+      setVisible(false);
+      if (fadeTimeout.current) clearTimeout(fadeTimeout.current);
+      fadeTimeout.current = setTimeout(() => setShouldRender(false), 500); // match CSS transition
+    }
+    return () => {
+      if (fadeTimeout.current) clearTimeout(fadeTimeout.current);
+    };
+  }, [track, shouldRender]);
+
   const formatTime = (ms: number) => {
     const minutes = Math.floor(ms / 60000);
     const seconds = Math.floor((ms % 60000) / 1000);
@@ -72,19 +89,18 @@ export default function NowPlaying() {
     );
   }
 
-  // Don't render anything if there's no track or it's not playing
-  if (!track || !track.isPlaying) {
+  if (!shouldRender) {
     return null;
   }
 
   return (
-    <AnimatedSection delay={0.2} className="flex flex-col">
+    <AnimatedSection delay={0.2} className={`flex flex-col nowplaying-fade${visible ? '' : ' out'}`}>
       <div className="flex justify-between h-6">
         <h2 className="text-sm font-mono leading-6">NOW PLAYING</h2>
         <span className="text-xs font-mono text-gray-400 leading-6">[4]</span>
       </div>
       <div className="mt-2 flex items-start gap-4">
-        {track.albumArtUrl && (
+        {track && track.albumArtUrl && (
           <div className={`relative w-20 h-20 flex-shrink-0 flex items-center justify-center ${track.isPlaying ? 'animate-spin-slow' : ''}`}>
             {/* Vinyl background */}
             <div className="absolute inset-0 rounded-full border-4 border-black shadow-lg" />
@@ -104,23 +120,23 @@ export default function NowPlaying() {
           <div className="flex items-center gap-2">
             <div className="flex-1 min-w-0">
               <a
-                href={track.trackUrl}
+                href={track?.trackUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group flex items-center gap-1 hover:text-gray-600 transition-colors"
               >
-                <span className="font-[&apos;Goudy_Bookletter_1911&apos;] text-sm truncate">{track.title}</span>
+                <span className="font-[&apos;Goudy_Bookletter_1911&apos;] text-sm truncate">{track?.title}</span>
                 <ExternalLink className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />
               </a>
               <a
-                href={track.artistUrl}
+                href={track?.artistUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-xs text-gray-500 hover:text-gray-600 transition-colors truncate block"
               >
-                {track.artist}
+                {track?.artist}
               </a>
-              <span className="text-xs text-gray-400 block truncate">{track.album}</span>
+              <span className="text-xs text-gray-400 block truncate">{track?.album}</span>
             </div>
           </div>
           <div className="mt-2">
@@ -131,8 +147,8 @@ export default function NowPlaying() {
               />
             </div>
             <div className="flex justify-between text-xs text-gray-400 mt-1">
-              <span>{formatTime(track.progressMs)}</span>
-              <span>{formatTime(track.durationMs)}</span>
+              <span>{formatTime(track?.progressMs ?? 0)}</span>
+              <span>{formatTime(track?.durationMs ?? 0)}</span>
             </div>
           </div>
         </div>

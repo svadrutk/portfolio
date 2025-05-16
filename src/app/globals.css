@@ -29,3 +29,11 @@ body {
 .animate-spin-slow {
   animation: spin-slow 4s linear infinite;
 }
+
+.nowplaying-fade {
+  opacity: 1;
+  transition: opacity 0.5s;
+}
+.nowplaying-fade.out {
+  opacity: 0;
+}

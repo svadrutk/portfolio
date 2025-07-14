@@ -86,9 +86,7 @@ I currently work on the Knowledge Management team at Wayfair, designing and buil
 
           {/* Third row - Now Playing widget */}
           <AnimatedSection delay={1.0} className="border-t border-gray-200 pt-5">
-            <AnimatePresence mode="wait">
-              <NowPlaying key={Math.random()} />
-            </AnimatePresence>
+            <NowPlaying />
           </AnimatedSection>
         </div>
       </div>

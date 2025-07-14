@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Music, ExternalLink } from 'lucide-react';
+import { ExternalLink } from 'lucide-react';
 import AnimatedSection from './AnimatedSection';
 import Image from 'next/image';
 
@@ -19,7 +19,6 @@ interface Track {
 
 export default function NowPlaying() {
   const [track, setTrack] = useState<Track | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
@@ -39,8 +38,6 @@ export default function NowPlaying() {
       } catch (error) {
         console.error('Error fetching track:', error);
         setTrack(null);
-      } finally {
-        setIsLoading(false);
       }
     };
 
@@ -57,22 +54,7 @@ export default function NowPlaying() {
     return `${minutes}:${seconds.toString().padStart(2, '0')}`;
   };
 
-  if (isLoading) {
-    return (
-      <AnimatedSection delay={0.2} className="flex flex-col">
-        <div className="flex justify-between h-6">
-          <h2 className="text-sm font-mono leading-6">NOW PLAYING</h2>
-          <span className="text-xs font-mono text-gray-400 leading-6">[4]</span>
-        </div>
-        <div className="mt-2 flex items-center gap-2">
-          <Music className="w-4 h-4 text-gray-400 animate-pulse" />
-          <span className="text-sm text-gray-400">Loading...</span>
-        </div>
-      </AnimatedSection>
-    );
-  }
-
-  // Don't render anything if there's no track or it's not playing
+  // Only render if there's a track and it's playing
   if (!track || !track.isPlaying) {
     return null;
   }

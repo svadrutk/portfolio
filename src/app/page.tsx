@@ -5,7 +5,6 @@ import AnimatedSection from '@/components/AnimatedSection';
 import NowPlaying from '@/components/NowPlaying';
 import { useRouter } from 'next/navigation';
 import { useTransition } from 'react';
-import { AnimatePresence } from 'framer-motion';
 
 export default function Home() {
   const router = useRouter();

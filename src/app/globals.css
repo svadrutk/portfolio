@@ -10,6 +10,8 @@
   --color-foreground: var(--foreground);
   --font-serif: var(--font-goudy-bookletter);
   --font-mono: var(--font-space-mono);
+  --font-goudy: var(--font-goudy-bookletter);
+  --font-space-mono: var(--font-space-mono);
 }
 
 body {

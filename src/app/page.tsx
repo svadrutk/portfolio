@@ -18,8 +18,12 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-white flex items-center justify-center">
-      <div className="w-full max-w-2xl mx-auto px-6 md:px-4">
+        <div className="min-h-screen flex items-center justify-center relative">
+      <div 
+        className="absolute inset-0 opacity-50" 
+        style={{ backgroundImage: 'url(/paper-texture.jpg)', backgroundSize: 'cover', backgroundPosition: 'center' }}
+      />
+      <div className="relative z-10 w-full max-w-2xl mx-auto px-6 md:px-4">
         <div className="grid gap-5 font-serif py-8 md:py-0">
           {/* First row - full width */}
           <AnimatedSection delay={0.2} className="border-b border-gray-200">

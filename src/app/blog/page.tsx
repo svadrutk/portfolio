@@ -23,13 +23,13 @@ export default function BlogPage() {
     <>
       <button 
         onClick={handleBackClick}
-        className="fixed top-4 left-4 p-3 text-gray-400 transition-all hover:text-gray-600 z-50 hover:cursor-pointer bg-white/80 backdrop-blur-sm rounded-full shadow-sm"
+        className="fixed bottom-4 left-4 p-3 text-gray-400 transition-all hover:text-gray-600 z-50 hover:cursor-pointer bg-white/80 backdrop-blur-sm rounded-full shadow-sm"
         style={{ opacity: isPending ? 0.5 : 1 }}
       >
         <ArrowLeftFromLine className="w-6 h-6" />
       </button>
 
-      <div className="min-h-screen w-full bg-white">
+      <div className="min-h-screen w-full">
         <div className="h-screen flex flex-col md:grid md:grid-cols-[30%_70%]">
           <AnimatedSection delay={0.4} className="border-b md:border-b-0 md:border-r border-gray-200 p-4 md:p-6 overflow-y-auto">
             <div className="w-full">

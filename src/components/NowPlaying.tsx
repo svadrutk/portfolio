@@ -41,11 +41,22 @@ export default function NowPlaying() {
       }
     };
 
-    fetchTrack();
-    // Always poll every 2 seconds to catch transitions quickly
-    const interval = setInterval(fetchTrack, 2000);
+    let intervalId: NodeJS.Timeout;
+    
+    // Delay initial fetch by 3 seconds to let critical content load first
+    const initialDelay = setTimeout(() => {
+      fetchTrack();
+      // Start polling after the initial fetch
+      intervalId = setInterval(fetchTrack, 2000);
+    }, 3000);
 
-    return () => clearInterval(interval);
+    // Clean up both timeout and interval when component unmounts
+    return () => {
+      clearTimeout(initialDelay);
+      if (intervalId) {
+        clearInterval(intervalId);
+      }
+    };
   }, []);
 
   const formatTime = (ms: number) => {

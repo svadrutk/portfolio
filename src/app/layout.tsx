@@ -9,12 +9,14 @@ const goudyBookletter = Goudy_Bookletter_1911({
   variable: "--font-goudy-bookletter",
   weight: "400",
   subsets: ["latin"],
+  display: "swap",
 });
 
 const spaceMono = Space_Mono({
   variable: "--font-space-mono",
   weight: ["400", "700"],
   subsets: ["latin"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -37,10 +39,21 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <link rel="preload" as="image" href="/paper-texture.jpg" />
+      </head>
       <body
         className={`${goudyBookletter.variable} ${spaceMono.variable} antialiased`}
       >
-        {children}
+        <div className="min-h-screen relative">
+          <div 
+            className="absolute inset-0 opacity-50" 
+            style={{ backgroundImage: 'url(/paper-texture.jpg)', backgroundSize: 'cover', backgroundPosition: 'center' }}
+          />
+          <div className="relative z-10">
+            {children}
+          </div>
+        </div>
         <Analytics />
         <SpeedInsights />
       </body>

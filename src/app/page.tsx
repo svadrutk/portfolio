@@ -2,13 +2,50 @@
 
 import { ArrowUpRight } from 'lucide-react';
 import AnimatedSection from '@/components/AnimatedSection';
-import NowPlaying from '@/components/NowPlaying';
+import CampusfyModal from '@/components/CampusfyModal';
 import { useRouter } from 'next/navigation';
-import { useTransition } from 'react';
+import { useTransition, useState } from 'react';
+import Image from 'next/image';
 
 export default function Home() {
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
+  const openModal = () => {
+    setIsModalOpen(true);
+    // Small delay to ensure DOM is updated before animation starts
+    setTimeout(() => setIsModalVisible(true), 10);
+  };
+
+  const closeModal = () => {
+    setIsModalVisible(false);
+    setTimeout(() => {
+      setIsModalOpen(false);
+    }, 300);
+  };
+
+  const campusfyImages = [
+    { 
+      src: '/campusfy/advisor.png', 
+      alt: 'Campusfy advisor feature', 
+      title: 'AI Course Advisor',
+      description: 'Get personalized course recommendations based on your interests, academic goals, and scheduling preferences.'
+    },
+    { 
+      src: '/campusfy/class.png', 
+      alt: 'Campusfy class details', 
+      title: 'Detailed Course Info',
+      description: 'Access comprehensive course information including ratings, workload, prerequisites, and student reviews.'
+    },
+    { 
+      src: '/campusfy/search.png', 
+      alt: 'Campusfy search interface', 
+      title: 'Smart Course Search',
+      description: 'Filter and search through thousands of courses with advanced filters for credits, difficulty, and more.'
+    }
+  ];
 
   const handleBlogClick = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -19,7 +56,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen flex items-center justify-center">
-      <div className="w-full max-w-2xl mx-auto px-6 md:px-4">
+      <div className="w-full max-w-4xl mx-auto px-6 md:px-4">
         <div className="grid gap-5 font-serif py-8 md:py-0">
           {/* First row - full width */}
           <AnimatedSection delay={0.2} className="border-b border-gray-200">
@@ -43,10 +80,6 @@ I currently work on the Knowledge Management team at <span className="font-bold 
               <div className="mt-2">
                 <a href="https://linkedin.com/in/svadrut" target="_blank" rel="noopener noreferrer" className="flex justify-between items-center group">
                   <span className="font-[&apos;Goudy_Bookletter_1911&apos;]">Linkedin</span>
-                  <ArrowUpRight className="w-4 h-4 text-gray-400 group-hover:text-gray-600 transition-colors" />
-                </a>
-                <a href="https://campusfy.app" target="_blank" rel="noopener noreferrer" className="flex justify-between items-center group">
-                  <span className="font-[&apos;Goudy_Bookletter_1911&apos;]">Campusfy</span>
                   <ArrowUpRight className="w-4 h-4 text-gray-400 group-hover:text-gray-600 transition-colors" />
                 </a>
                 <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" className="flex justify-between items-center group">
@@ -76,19 +109,83 @@ I currently work on the Knowledge Management team at <span className="font-bold 
                   <div className="w-2 h-2 bg-purple-500 border border-black border-1 mr-1"></div>
                 </div>
                 <div className="flex justify-between h-6 items-center">
-                  <span className="font-[&apos;Goudy_Bookletter_1911&apos;] leading-6">SkyWater Technology <span className="text-sm font-mono leading-6">(2023)</span></span>
+                  <span className="font-[&apos;Goudy_Bookletter_1911&apos;] leading-6">Skywater Technology <span className="text-sm font-mono leading-6">(2023)</span></span>
                   <div className="w-2 h-2 bg-lime-600 border border-black border-1 mr-1"></div>
                 </div>
               </div>
             </AnimatedSection>
           </AnimatedSection>
 
-          {/* Third row - Now Playing widget */}
-          <AnimatedSection delay={1.0} className="border-t border-gray-200 pt-5">
-            <NowPlaying />
+          {/* Third row - Projects */}
+          <AnimatedSection delay={1.0} className="border-t border-gray-200 pt-5 mb-4">
+            <div className="flex justify-between h-6 mb-4">
+              <h2 className="text-sm font-mono leading-6">PROJECTS</h2>
+              <span className="text-xs font-mono text-gray-400 leading-6">[4]</span>
+            </div>
+            <div className="space-y-3">
+              <div className="group">
+                <div className="flex justify-between items-start mb-2">
+                  <div>
+                    <h3 className="font-['Goudy_Bookletter_1911'] text-lg">Campusfy</h3>
+                    <p className="text-sm text-gray-600 mt-1">Course discovery platform for university students</p>
+                  </div>
+                  <a href="https://campusfy.app" target="_blank" rel="noopener noreferrer" className="text-xs font-mono text-gray-400 hover:text-gray-600 transition-colors">
+                    visit →
+                  </a>
+                </div>
+                <div 
+                  className="relative mt-3 group cursor-pointer"
+                  onClick={openModal}
+                >
+                  {/* Stacked images with subtle animations */}
+                  <div className="relative transition-all duration-300 hover:translate-x-1 hover:-translate-y-1 z-20">
+                    <Image 
+                      src="/campusfy/search.png" 
+                      alt="Campusfy search interface"
+                      width={800}
+                      height={500}
+                      className="w-full h-[150px] rounded border border-gray-200 shadow-sm object-cover"
+                    />
+                  </div>
+                  <div className="absolute inset-0 -translate-x-2 translate-y-2 transition-all duration-300 hover:translate-x-0 hover:translate-y-0 z-10">
+                    <Image 
+                      src="/campusfy/class.png" 
+                      alt="Campusfy class details"
+                      width={800}
+                      height={500}
+                      className="w-full h-[150px] rounded border border-gray-200 shadow-sm object-cover"
+                    />
+                  </div>
+                  <div className="absolute inset-0 -translate-x-4 translate-y-4 transition-all duration-300 hover:translate-x-1 hover:-translate-y-1 z-0">
+                    <Image 
+                      src="/campusfy/advisor.png" 
+                      alt="Campusfy advisor feature"
+                      width={800}
+                      height={500}
+                      className="w-full h-[150px] rounded border border-gray-200 shadow-sm object-cover"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </AnimatedSection>
+
+          {/* Fourth row - Contact */}
+          <AnimatedSection delay={1.2} className="border-t border-gray-200 pt-5">
+            <div className="flex">
+              <span className="text-sm font-mono text-gray-400">kukunoorusvadrut [at] gmail [dot] com</span>
+            </div>
           </AnimatedSection>
         </div>
       </div>
+      
+      {/* Modal */}
+      <CampusfyModal
+        isOpen={isModalOpen}
+        isVisible={isModalVisible}
+        onClose={closeModal}
+        images={campusfyImages}
+      />
     </div>
   );
 }

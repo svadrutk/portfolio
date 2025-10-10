@@ -23,7 +23,7 @@ export default function Home() {
           {/* First row - full width */}
           <AnimatedSection delay={0.2} className="border-b border-gray-700">
             <div className="flex justify-between h-6 mb-4">
-              <h1 className="text-3xl leading-6 font-geist font-bold">Swad&apos;s Home</h1>
+              <h1 className="text-4xl leading-6 font-geist">Swad&apos;s Home</h1>
               <span className="text-xs font-mono text-gray-500 leading-6">[0]</span>
             </div>
             <p className="text-md mb-5">I like building products that make people&apos;s lives easier.

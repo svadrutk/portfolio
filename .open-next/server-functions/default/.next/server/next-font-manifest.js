@@ -1,1 +1,1 @@
-self.__NEXT_FONT_MANIFEST='{"pages":{},"app":{"/Users/svadrut/Documents/portfolio/src/app/layout":["static/media/5272aec66f026893-s.p.woff2","static/media/fc727f226c737876-s.p.woff2","static/media/806de4d605d3ad01-s.p.woff2"]},"appUsingSizeAdjust":true,"pagesUsingSizeAdjust":false}';
+self.__NEXT_FONT_MANIFEST='{"pages":{},"app":{"/Users/svadrut/Documents/portfolio/src/app/layout":["static/media/93f479601ee12b01-s.p.woff2","static/media/4cf2300e9c8272f7-s.p.woff2"]},"appUsingSizeAdjust":true,"pagesUsingSizeAdjust":false}';

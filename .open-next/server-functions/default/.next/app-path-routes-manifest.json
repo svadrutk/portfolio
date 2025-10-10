@@ -1,7 +1,7 @@
 {
-  "/api/posts/route": "/api/posts",
-  "/api/posts/[slug]/route": "/api/posts/[slug]",
   "/_not-found/page": "/_not-found",
+  "/api/posts/[slug]/route": "/api/posts/[slug]",
+  "/api/posts/route": "/api/posts",
   "/page": "/",
   "/blog/page": "/blog"
 }

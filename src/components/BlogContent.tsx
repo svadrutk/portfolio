@@ -64,9 +64,9 @@ export default function BlogContent({ slug }: BlogContentProps) {
       <motion.div 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        className="h-full flex items-center justify-center"
+        className="h-full flex items-center justify-center font-geist"
       >
-        <p className="text-gray-400">Select a post to read</p>
+        <p className="text-gray-500">Select a post to read</p>
       </motion.div>
     );
   }
@@ -76,9 +76,9 @@ export default function BlogContent({ slug }: BlogContentProps) {
       <motion.div 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        className="h-full flex items-center justify-center"
+        className="h-full flex items-center justify-center font-geist"
       >
-        <p className="text-gray-400">Loading...</p>
+        <p className="text-gray-500">Loading...</p>
       </motion.div>
     );
   }
@@ -88,7 +88,7 @@ export default function BlogContent({ slug }: BlogContentProps) {
       <motion.div 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        className="h-full flex items-center justify-center"
+        className="h-full flex items-center justify-center font-geist"
       >
         <p className="text-red-400">Post not found</p>
       </motion.div>
@@ -102,33 +102,33 @@ export default function BlogContent({ slug }: BlogContentProps) {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.3 }}
-      className="prose prose-lg max-w-none mx-auto px-4 py-8"
+      className="prose prose-lg max-w-none mx-auto px-4 py-8 font-geist"
     >
-      <h1 className="text-4xl font-light tracking-tight mb-4">{post.title}</h1>
+      <h1 className="text-4xl font-light tracking-tight mb-4 text-gray-100">{post.title}</h1>
       <div className="flex items-center gap-4 text-sm text-gray-500 mb-8">
         <span>{formatDate(post.date)}</span>
         <span>•</span>
         <span>{readTime} min read</span>
       </div>
-      <div className="prose prose-xl text-xl prose-headings:font-light prose-p:text-gray-700 prose-li:text-gray-700 prose-ol:text-gray-700 prose-ul:text-gray-700">
+      <div className="prose prose-xl text-xl prose-headings:font-light prose-headings:text-gray-200 prose-p:text-gray-300 prose-li:text-gray-300 prose-ol:text-gray-300 prose-ul:text-gray-300 prose-strong:text-gray-200 prose-a:text-blue-400 hover:prose-a:text-blue-300">
         <ReactMarkdown
           remarkPlugins={[remarkGfm]}
           rehypePlugins={[rehypeHighlight, rehypeRaw]}
           components={{
             p: ({ children }) => (
-              <p className="mb-6">{children}</p>
+              <p className="mb-6 text-gray-300">{children}</p>
             ),
             ol: ({ children }) => (
-              <ol className="list-decimal pl-6 mb-6">{children}</ol>
+              <ol className="list-decimal pl-6 mb-6 text-gray-300">{children}</ol>
             ),
             ul: ({ children }) => (
-              <ul className="list-disc pl-6 mb-6">{children}</ul>
+              <ul className="list-disc pl-6 mb-6 text-gray-300">{children}</ul>
             ),
             li: ({ children }) => (
-              <li className="mb-2">{children}</li>
+              <li className="mb-2 text-gray-300">{children}</li>
             ),
             blockquote: ({ children }) => (
-              <blockquote className="border-l-4 border-gray-200 pl-4 italic my-6">{children}</blockquote>
+              <blockquote className="border-l-4 border-gray-600 pl-4 italic my-6 text-gray-400">{children}</blockquote>
             ),
             br: () => <br className="mb-6" />
           }}

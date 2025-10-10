@@ -102,7 +102,7 @@ export default function NowPlaying() {
                 rel="noopener noreferrer"
                 className="group flex items-center gap-1 hover:text-gray-600 transition-colors"
               >
-                <span className="font-[&apos;Goudy_Bookletter_1911&apos;] text-sm truncate">{track.title}</span>
+                <span className="font-geist text-sm truncate">{track.title}</span>
                 <ExternalLink className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />
               </a>
               <a

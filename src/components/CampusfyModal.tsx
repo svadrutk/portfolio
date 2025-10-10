@@ -36,7 +36,7 @@ export default function CampusfyModal({ isOpen, isVisible, onClose, images }: Ca
         {/* Modal Header */}
         <div className="sticky top-0 bg-white border-b border-gray-200 px-8 py-6 relative z-10">
           <div className="text-center">
-            <h3 className="text-3xl font-serif tracking-tight">Campusfy</h3>
+            <h3 className="text-3xl font-geist tracking-tight">Campusfy</h3>
           </div>
           <button 
             onClick={onClose}
@@ -64,7 +64,7 @@ export default function CampusfyModal({ isOpen, isVisible, onClose, images }: Ca
                   <div className="text-xs font-mono text-gray-400 tracking-wider uppercase">
                     Feature {index + 1}
                   </div>
-                  <h4 className="text-2xl font-['Goudy_Bookletter_1911'] text-gray-900 leading-tight">
+                  <h4 className="text-2xl font-geist text-gray-900 leading-tight">
                     {image.title}
                   </h4>
                   <p className="text-gray-600 leading-relaxed text-lg">

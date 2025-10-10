@@ -1,0 +1,132 @@
+import { calculateReadTime } from '@/utils/readTime';
+
+export interface Post {
+  slug: string;
+  title: string;
+  description: string;
+  date: string;
+  tags: string[];
+  content: string;
+  readTime: string;
+}
+
+// Static posts data - this replaces filesystem reads for Cloudflare Workers compatibility
+const POSTS_DATA: Omit<Post, 'readTime'>[] = [
+  {
+    slug: 'campusfy',
+    title: 'Campusfy',
+    description: 'Campusfy Updates',
+    date: '2024-03-20',
+    tags: ['campusfy'],
+    content: `Over the past few months, I've been working on **Campusfy** — a platform built to help students make smarter, easier decisions about the classes they take. Think of it as a more interactive, intelligent layer on top of traditional course review sites, with features that go beyond just star ratings or vague comments.
+
+Campusfy is a web platform where students can:
+
+- Leave detailed class reviews based on workload, teaching style, and grading emphasis.
+- Discover new classes based on interests, degree requirements, or instructor quality.
+- Use AI-powered insights to plan out their semesters.
+- Compare course difficulty and explore patterns across departments.
+
+Right now, we're live for **University of Wisconsin–Madison** and **University of Utah**, but that's just the beginning.
+
+I've basically built the whole platform, but some of the things I'm most proud of include:
+
+- **AI Advisor (Class Discovery Tool):** Built a smart filtering and recommendation system that helps students find courses based on what they actually care about (grading style, class size, reviews mentioning key terms, etc.)
+- **Review Insights:** Aggregated and visualized grading patterns from hundreds of reviews to give students a quick understanding of class expectations.
+- **Scalability Work:** Refactored parts of the architecture to make it easier to onboard new universities and support more user traffic.
+- **User Experience:** Simplified review writing and browsing with a focus on clean UI, minimal steps, and fast performance.
+
+We're excited to share that Campusfy has hit a couple of early growth goals:
+
+- **1,000+ unique visitors**  
+- **Over 4,000 page views**  
+
+For something that started as a side project with a few scrappy student developers, it's amazing to see this kind of traction.
+
+The next steps for Campusfy are all about **scale** and **value**:
+
+- **Expansion to more schools**, starting with the University of Michigan. We've seen strong interest from students there, and we're building out the backend support to make onboarding smooth.
+- **More structured academic data:** We're looking into partnerships (or scraping alternatives if needed) to integrate course catalogs, professor schedules, and grade distributions to further enrich recommendations.
+- **Monetization:** We're exploring ethically sound ways to monetize — possibly through career tools or degree planning services tailored to students' actual coursework history.
+- **Community features:** Think shared schedules, private recommendation lists, or alumni-backed reviews.
+
+> Go to either of these schools and want to leave a review of your own classes? Head over to [**campusfy.app**](https://campusfy.app).`
+  },
+  {
+    slug: 'the-jasmine-throne',
+    title: 'The Jasmine Throne',
+    description: 'Reviewing The Jasmine Throne by Tasha Suri',
+    date: '2024-02-28',
+    tags: ['book-review'],
+    content: `Fantasy is my favorite genre. My first tattoo is the symbol for the Deathly Hallows 
+from *Harry Potter*, and I grew up reading series like *Lord of the Rings* and 
+*The Chronicles of Narnia*. Recently, I've gotten back into the genre and read things 
+like *Ninth House*, *The Poppy War*, and *Fourth Wing*. One could say I've developed 
+a bit of a standard for fantasy books I read:  
+
+1. In-depth worldbuilding that isn't hard to understand.  
+2. Compelling characters that don't just serve as a vehicle for the author to expound 
+on their in-depth worldbuilding.  
+3. Contains something that I haven't seen before in other fantasy novels—
+"high fantasy" books are a dime a dozen and easy to replicate.  
+
+This book checks all three.  
+
+*The Jasmine Throne* follows two central characters: **Malini**, an exiled princess 
+imprisoned by her zealot brother for refusing to bow to his rule and religion, and 
+**Priya**, a maidservant with a secret, sacred past. Their lives intersect in 
+the decaying temple-turned-palace where Malini is held captive and Priya works, setting 
+off a chain of events that entangles them in rebellion, forbidden magic, and shifting 
+allegiances.  
+
+The story takes place in a fractured empire simmering with unrest. As old powers 
+awaken and long-buried histories resurface, Priya and Malini must confront not 
+only their personal demons but also the fate of an entire empire.  
+
+What stood out most to me was how unapologetically **Indian** this book is. Not 
+in a decorative or aesthetic sense, but in its bones. The characters have Indian names. 
+The religious practices, festivals, food, languages, and power structures are all 
+rooted in South Asian traditions. And none of it is filtered or over-explained for 
+a Western reader—it's just *there*. As it should be.  
+
+As someone who's Indian, it was honestly kind of healing to see our cultures and 
+histories not only included but centered in a fantasy setting. It's rare 
+to read something that doesn't feel like it's trying to fit into the Eurocentric mold
+just to be taken seriously.  
+
+Another thing I loved: the central relationship is sapphic, and it's powerful in 
+all the right ways. It's slow-burn, complex, political, and deeply emotional. 
+As a queer Indian reader, it meant so much to see two brown women at the heart of 
+a fantasy novel—*not* as side characters or tokens, but as protagonists shaping 
+the world around them and falling in love on their own terms.  
+
+Even if I weren't queer, I'd still appreciate how carefully and beautifully 
+it's written. The relationship feels organic, earned, and real. It's not performative —
+it matters.  
+
+*The Jasmine Throne* is the kind of book I wish had existed when I was younger. 
+It's lush, defiant, tender, and fierce all at once. If you love fantasy that's 
+emotionally intelligent, politically charged, and culturally rich, this 
+is a must-read. I can't wait to dive into the rest of the trilogy.  
+
+> *Representation that doesn't compromise on craft. 4 stars out of 5.*`
+  }
+];
+
+// Add read time calculation and return full posts
+export function getAllPosts(): Post[] {
+  return POSTS_DATA.map(post => ({
+    ...post,
+    readTime: calculateReadTime(post.content)
+  })).sort((a, b) => (a.date < b.date ? 1 : -1));
+}
+
+export function getPostBySlug(slug: string): Post | null {
+  const post = POSTS_DATA.find(p => p.slug === slug);
+  if (!post) return null;
+  
+  return {
+    ...post,
+    readTime: calculateReadTime(post.content)
+  };
+}

@@ -12,7 +12,7 @@
       "static/chunks/4bd1b696-f7faa06557c7c9a7.js",
       "static/chunks/684-d8bb745d6a62cd62.js",
       "static/chunks/main-app-99de36ca98da67c2.js",
-      "static/css/0e36782e3c943f63.css",
+      "static/css/1d8b6799e0a8e5a2.css",
       "static/chunks/app/layout-9c100e8204df4deb.js"
     ],
     "/api/posts/[slug]/route": [
@@ -35,7 +35,7 @@
       "static/chunks/684-d8bb745d6a62cd62.js",
       "static/chunks/main-app-99de36ca98da67c2.js",
       "static/chunks/359-34f525761748eb9a.js",
-      "static/chunks/app/page-1344c98bc863f45c.js"
+      "static/chunks/app/page-b2011c45616668e1.js"
     ],
     "/blog/layout": [
       "static/chunks/webpack-aa611e9cae9a159f.js",

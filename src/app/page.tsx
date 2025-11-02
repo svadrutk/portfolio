@@ -27,7 +27,7 @@ export default function Home() {
               <span className="text-xs font-mono text-gray-500 leading-6 -mt-1">[0]</span>
             </div>
             <p className="text-md mb-5">I like building products that make people&apos;s lives easier.
-I studied Computer Science and Data Science at UW–Madison and co-founded <span className="text-red-400"><a href="https://campusfy.app" target="_blank" rel="noopener noreferrer">Campusfy</a></span> — a platform helping students discover the right classes and plan their degrees with confidence. I care about fast feedback loops, intuitive user experiences, and turning scrappy ideas into real, working software.
+I studied Computer Science and Data Science at UW–Madison and co-founded <span className="text-red-400"><a href="https://campusfy.app" target="_blank" rel="noopener noreferrer">Campusfy</a></span> — a platform helping students discover the right classes and plan their degrees with confidence. I also made <span className="text-green-400"><a href="https://trackhuntr.com" target="_blank" rel="noopener noreferrer">TrackHuntr</a></span> — a Chrome extension helping EDM fans and DJs discover the best tracks, straight from the source. I care about fast feedback loops, intuitive user experiences, and turning scrappy ideas into real, working software.
 I currently work on the Knowledge Management team at <span className="text-purple-400"><a href="https://wayfair.com" target="_blank" rel="noopener noreferrer">Wayfair</a></span>, designing and implementing agents that help teams find and share information more effectively.</p>
           </AnimatedSection>
           

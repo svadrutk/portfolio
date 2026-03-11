@@ -29,7 +29,7 @@ export default function BlogPage() {
         <ArrowLeftFromLine className="w-6 h-6" />
       </button>
 
-      <div className="min-h-screen w-full font-geist">
+      <div className="min-h-screen w-full font-cooper">
         <div className="h-screen flex flex-col md:grid md:grid-cols-[30%_70%]">
           <AnimatedSection delay={0.4} className="border-b md:border-b-0 md:border-r border-gray-700 p-4 md:p-6 overflow-y-auto">
             <div className="w-full">

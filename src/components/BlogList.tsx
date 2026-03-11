@@ -37,7 +37,7 @@ export default function BlogList({ onSelectPost, selectedSlug }: BlogListProps) 
   };
 
   return (
-    <div className="h-full font-geist">
+    <div className="h-full font-cooper">
       <div className="flex flex-col space-y-4 pb-4">
         {posts.map((post) => (
           <motion.div

@@ -73,8 +73,8 @@ export default function NowPlaying() {
   return (
     <AnimatedSection delay={0.2} className="flex flex-col">
       <div className="flex justify-between h-6">
-        <h2 className="text-sm font-mono leading-6">NOW PLAYING</h2>
-        <span className="text-xs font-mono text-gray-400 leading-6">[4]</span>
+        <h2 className="text-sm font-cooper leading-6">NOW PLAYING</h2>
+        <span className="text-xs font-cooper text-gray-400 leading-6">[4]</span>
       </div>
       <div className="mt-2 flex items-start gap-4">
         {track.albumArtUrl && (
@@ -102,7 +102,7 @@ export default function NowPlaying() {
                 rel="noopener noreferrer"
                 className="group flex items-center gap-1 hover:text-gray-600 transition-colors"
               >
-                <span className="font-geist text-sm truncate">{track.title}</span>
+                <span className="font-cooper text-sm truncate">{track.title}</span>
                 <ExternalLink className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />
               </a>
               <a

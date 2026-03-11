@@ -36,11 +36,11 @@ export default function CampusfyModal({ isOpen, isVisible, onClose, images }: Ca
         {/* Modal Header */}
         <div className="sticky top-0 bg-white border-b border-gray-200 px-8 py-6 relative z-10">
           <div className="text-center">
-            <h3 className="text-3xl font-geist tracking-tight">Campusfy</h3>
+            <h3 className="text-3xl font-cooper tracking-tight">Campusfy</h3>
           </div>
           <button 
             onClick={onClose}
-            className="absolute top-5 right-8 text-gray-400 hover:text-gray-700 hover:bg-gray-100 transition-all duration-200 w-10 h-10 rounded-full flex items-center justify-center text-xl font-mono"
+            className="absolute top-5 right-8 text-gray-400 hover:text-gray-700 hover:bg-gray-100 transition-all duration-200 w-10 h-10 rounded-full flex items-center justify-center text-xl font-cooper"
           >
             ×
           </button>
@@ -61,10 +61,10 @@ export default function CampusfyModal({ isOpen, isVisible, onClose, images }: Ca
               </div>
               <div className={`${index % 2 === 1 ? 'md:order-1' : ''}`}>
                 <div className="space-y-3">
-                  <div className="text-xs font-mono text-gray-400 tracking-wider uppercase">
+                  <div className="text-xs font-cooper text-gray-400 tracking-wider uppercase">
                     Feature {index + 1}
                   </div>
-                  <h4 className="text-2xl font-geist text-gray-900 leading-tight">
+                  <h4 className="text-2xl font-cooper text-gray-900 leading-tight">
                     {image.title}
                   </h4>
                   <p className="text-gray-600 leading-relaxed text-lg">
@@ -83,7 +83,7 @@ export default function CampusfyModal({ isOpen, isVisible, onClose, images }: Ca
               href="https://campusfy.app" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="text-sm font-mono text-gray-600 hover:text-gray-900 transition-colors flex items-center gap-2 px-4 py-2 rounded-lg hover:bg-white hover:shadow-sm"
+              className="text-sm font-cooper text-gray-600 hover:text-gray-900 transition-colors flex items-center gap-2 px-4 py-2 rounded-lg hover:bg-white hover:shadow-sm"
             >
               Visit Campusfy <ArrowUpRight className="w-4 h-4" />
             </a>

@@ -1,0 +1,37 @@
+---
+title: 'TrackHuntr'
+description: 'How I built a Chrome extension that identifies tracks from DJ sets on YouTube'
+date: '2026-02-08'
+tags: ['project', 'trackhuntr']
+---
+If you've ever watched a DJ set on YouTube and thought *"what song is that?"*, you know the pain. You could try Shazam, but DJs layer, blend, and transition between tracks in ways that confuse most identification tools. The go-to resource, 1001Tracklists, often has the answer — buried under a mountain of ads and a UI that feels like it hasn't been updated since 2012. I figured there had to be a better way. So I built **TrackHuntr**: a Chrome extension that surfaces the tracklist right inside YouTube and links you to where you can stream each song.
+
+The interesting part wasn't just *what* it does — it's *how* it figures things out.
+
+## Is This Even a DJ Set?
+
+The first challenge was knowing when to show up. TrackHuntr shouldn't pop up on every YouTube video — only DJ sets. To solve this, I built a **classification system** powered by AI. When you land on a YouTube video, the extension sends the video's title, channel name, and description to my backend, which passes them through a language model (via Groq). The model returns a simple verdict: DJ set or not, along with a confidence score. If it's confident enough, the widget appears. If not, it stays hidden. This keeps the experience clean — no false alarms on cooking tutorials or podcast clips.
+
+## Finding the Tracklist
+
+Once we know it's a DJ set, the real work begins: extracting the tracklist. The problem is that tracklists live in different places depending on the video. Sometimes they're in the YouTube **chapters**. Sometimes they're buried in the **video description**. Sometimes a helpful commenter typed the whole thing out. And sometimes, you have to go to an external site like 1001Tracklists to find it.
+
+Rather than picking one source and hoping for the best, TrackHuntr uses a **parallel extraction pipeline** — it checks multiple sources at the same time and merges the results. Chapters and metadata are fast, so they run together first. Then the system looks at comments using a **scoring algorithm** that evaluates factors like like count, text length, and the presence of tracklist-like patterns (timestamps, "Artist - Title" formatting, etc.). The top-scoring comments get sent to an AI parser that can understand messy, inconsistent formatting and extract structured track data from it. If all of that comes up empty, 1001Tracklists acts as a final fallback.
+
+This layered approach means TrackHuntr almost always finds *something*, even when the tracklist isn't obvious.
+
+## Identifying Tracks
+
+Having a list of track names is one thing. Linking them to actual streaming services is another. TrackHuntr runs each track through a **three-stage identification pipeline**: first Discogs (great for niche electronic music), then Spotify, and finally a GPT-based disambiguation step if there are multiple potential matches. The result is a clean set of streaming links — Spotify, SoundCloud, Beatport — right in the widget overlay on YouTube.
+
+To keep things fast, the system uses a **cache-first architecture**: check Redis, then check the database, and only do the expensive extraction and identification work if nothing's been cached yet. This matters a lot when multiple users watch the same popular set.
+
+## The Stack
+
+The backend is a **FastAPI** app (Python) running on Railway with PostgreSQL and Redis. The Chrome extension is built in **React 19** with TypeScript using a monorepo structure — shared packages for the API client, UI components, and storage utilities. There's also a **Next.js landing page** deployed to Cloudflare Pages. The whole system is locked down with extension-ID-based authentication so only the real extension can talk to the API.
+
+## What I Learned
+
+Building TrackHuntr taught me a lot about designing systems that deal with messy, real-world data. YouTube comments don't follow any standard format. DJs don't always label their tracks. External APIs have rate limits and downtime. The key insight was that **no single approach works every time** — you need layered strategies with graceful fallbacks. That philosophy shaped everything from the extraction pipeline to the identification system to the caching layer.
+
+> [**TrackHuntr**](https://trackhuntr.com) is available on the Chrome Web Store. If you're into electronic music and DJ sets, give it a try.

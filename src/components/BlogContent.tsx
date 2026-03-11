@@ -64,7 +64,7 @@ export default function BlogContent({ slug }: BlogContentProps) {
       <motion.div 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        className="h-full flex items-center justify-center font-geist"
+        className="h-full flex items-center justify-center font-cooper"
       >
         <p className="text-gray-500">Select a post to read</p>
       </motion.div>
@@ -76,7 +76,7 @@ export default function BlogContent({ slug }: BlogContentProps) {
       <motion.div 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        className="h-full flex items-center justify-center font-geist"
+        className="h-full flex items-center justify-center font-cooper"
       >
         <p className="text-gray-500">Loading...</p>
       </motion.div>
@@ -88,7 +88,7 @@ export default function BlogContent({ slug }: BlogContentProps) {
       <motion.div 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        className="h-full flex items-center justify-center font-geist"
+        className="h-full flex items-center justify-center font-cooper"
       >
         <p className="text-red-400">Post not found</p>
       </motion.div>
@@ -102,7 +102,7 @@ export default function BlogContent({ slug }: BlogContentProps) {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.3 }}
-      className="prose prose-lg max-w-none mx-auto px-4 py-8 font-geist"
+      className="prose prose-lg max-w-none mx-auto px-4 py-8 font-cooper"
     >
       <h1 className="text-4xl font-light tracking-tight mb-4 text-gray-100">{post.title}</h1>
       <div className="flex items-center gap-4 text-sm text-gray-500 mb-8">
@@ -115,6 +115,12 @@ export default function BlogContent({ slug }: BlogContentProps) {
           remarkPlugins={[remarkGfm]}
           rehypePlugins={[rehypeHighlight, rehypeRaw]}
           components={{
+            h2: ({ children }) => (
+              <h2 className="text-2xl font-light text-gray-200 mt-10 mb-4">{children}</h2>
+            ),
+            h3: ({ children }) => (
+              <h3 className="text-xl font-light text-gray-200 mt-8 mb-3">{children}</h3>
+            ),
             p: ({ children }) => (
               <p className="mb-6 text-gray-300">{children}</p>
             ),
@@ -126,6 +132,9 @@ export default function BlogContent({ slug }: BlogContentProps) {
             ),
             li: ({ children }) => (
               <li className="mb-2 text-gray-300">{children}</li>
+            ),
+            a: ({ href, children }) => (
+              <a href={href} target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300">{children}</a>
             ),
             blockquote: ({ children }) => (
               <blockquote className="border-l-4 border-gray-600 pl-4 italic my-6 text-gray-400">{children}</blockquote>

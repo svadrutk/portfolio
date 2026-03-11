@@ -1,0 +1,43 @@
+---
+title: 'Chorusboard'
+description: 'How I built a smarter way to rank your favorite songs'
+date: '2026-02-08'
+tags: ['project', 'chorusboard']
+---
+It started with an argument. My partner and I were trying to rank Ariana Grande's best songs, and the only tool we could find was a Tumblr blog with a bare-bones text interface. You'd pick between two songs, over and over, for what felt like forever. The rankings were wobbly, the experience was tedious, and there was no way to know when you'd compared enough. I thought: there has to be a smarter way to do this — one that looks good, works fast, and actually gives you a reliable ranking. So I built **Chorusboard**.
+
+The concept is simple: pick between two songs, repeat, and Chorusboard builds your ranking. But under the hood, the math and engineering are anything but simple.
+
+## Two Ranking Systems, One Experience
+
+The core challenge was making the app feel *instant* while also being *statistically accurate*. These two goals are in tension. Accurate ranking models need time to crunch numbers; users want to see their list update the moment they make a choice.
+
+The solution was a **hybrid system**. On the frontend, every comparison immediately updates an **Elo rating** — the same system used in chess. You tap a winner, and the rankings shift right away. It feels snappy and responsive. But Elo has limitations: it doesn't account for the full web of comparisons you've made, and it can be volatile with small sample sizes.
+
+So in the background, the backend runs a **Bradley-Terry model** — a more sophisticated statistical approach that looks at *all* your comparisons holistically and produces a maximum-likelihood ranking. Think of Elo as the "live score" and Bradley-Terry as the "final grade." Every five comparisons, the backend recalculates and the frontend syncs up. You get the best of both worlds: instant feedback and mathematical rigor.
+
+## Making It Fast with Background Workers
+
+Running Bradley-Terry on every comparison would be too slow to do inline with a web request. Instead, I offload the heavy computation to **Redis Queue (RQ) workers** — separate background processes that pick up ranking jobs and crunch the numbers independently. This keeps the API responsive. When you tap a song, the comparison is saved instantly, Elo updates on the frontend, and a job gets queued for the full Bradley-Terry recalculation. The frontend polls for updates with smart exponential backoff, so it picks up the new rankings as soon as they're ready without hammering the server.
+
+This same worker infrastructure handles **global leaderboard updates** — aggregated rankings across all users for a given artist. Those run on a batch schedule (every 10 minutes per artist) with Redis locks to prevent duplicate work.
+
+## Asking the Right Questions
+
+If you have 50 songs to rank, there are 1,225 possible pairs. You obviously can't compare them all. The trick is asking the *right* comparisons — the ones that give you the most information.
+
+Chorusboard uses an **adaptive pairing algorithm** with three phases. First, **coverage**: make sure every song gets compared at least a few times. Second, **refinement**: compare songs with similar scores to figure out who's actually better. Third, **verification**: stress-test the top 10 by comparing adjacent songs to make sure the ranking is stable. The system also weights your decisions by **speed** — if you pick a winner in under three seconds, that's a strong signal and counts more heavily. If you deliberate for ten seconds, the system treats it as a weaker preference.
+
+## Knowing When You're Done
+
+One of my favorite features is the **convergence score** — a 0-100% indicator that tells you how settled your ranking is. It combines three things: how many songs have enough comparisons (coverage), how well-separated the rankings are (separation), and whether the top 10 has been stable over recent comparisons (stability). When convergence is high, you can stop comparing and trust the results.
+
+## The Stack
+
+The frontend is **Next.js** with Zustand for state management, TanStack Query for data fetching, Framer Motion for animations, and D3 for analytics charts. The backend is **FastAPI** (Python) with Supabase as the database, Redis for caching and job queues, and Docker for deployment. There's even a **receipt generator** — Playwright renders a shareable image of your top 10 that looks like a store receipt.
+
+## What I Learned
+
+Chorusboard taught me that the best UX often comes from hiding complexity. The user just picks between two songs. They don't need to know about Bradley-Terry models or adaptive pairing or convergence metrics — they just see their ranking get better and a progress bar fill up. All the math serves a single goal: fewer comparisons, better results, and a ranking you can actually trust.
+
+> Want to settle your own music debates? Try Chorusboard at [**chorusboard.app**](https://chorusboard.app).

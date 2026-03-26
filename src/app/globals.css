@@ -17,7 +17,7 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-cooper);
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 .font-cooper {

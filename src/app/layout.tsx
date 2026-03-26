@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import { Geist_Mono } from "next/font/google";
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/next';
+import BulletHellGame from '@/components/BulletHellGame';
 import "./globals.css";
 
 const geistMono = Geist_Mono({
@@ -72,7 +73,8 @@ export default function RootLayout({
       <body
         className={`${cooperBT.variable} ${geistMono.variable} antialiased`}
       >
-        <div className="min-h-screen">
+        <BulletHellGame />
+        <div className="min-h-screen relative z-10">
           {children}
         </div>
         <Analytics />

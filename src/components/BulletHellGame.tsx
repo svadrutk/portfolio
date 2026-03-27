@@ -54,7 +54,6 @@ export default function BulletHellGame() {
   const [lives, setLives] = useState(INITIAL_LIVES);
   const [score, setScore] = useState(0);
   const [isDesktop, setIsDesktop] = useState(false);
-  const [isInvincible, setIsInvincible] = useState(false);
   const [showIntro, setShowIntro] = useState(true);
 
   const gameRef = useRef({
@@ -115,7 +114,6 @@ export default function BulletHellGame() {
     game.isInvincible = false;
     setLives(INITIAL_LIVES);
     setScore(0);
-    setIsInvincible(false);
     setShowIntro(true);
     setTimeout(() => setShowIntro(false), INTRO_DURATION);
     setGameState('playing');
@@ -356,10 +354,8 @@ export default function BulletHellGame() {
               setGameState('game-over');
             } else {
               game.isInvincible = true;
-              setIsInvincible(true);
               setTimeout(() => {
                 game.isInvincible = false;
-                setIsInvincible(false);
               }, INVINCIBILITY_DURATION);
             }
             break;
@@ -430,10 +426,10 @@ export default function BulletHellGame() {
   };
 
   return (
-    <div className={`fixed inset-0 z-50 ${gameState === 'game-over' || gameState === 'won' ? 'pointer-events-none' : ''}`}>
+    <div className="fixed inset-0 z-50 pointer-events-none">
       <canvas
         ref={canvasRef}
-        className={`absolute inset-0 ${gameState === 'paused' || gameState === 'game-over' || gameState === 'won' ? 'pointer-events-none' : 'pointer-events-auto'}`}
+        className="absolute inset-0 pointer-events-none"
       />
 
       <div className="absolute top-4 left-4 font-mono text-lg pointer-events-none">
@@ -451,7 +447,7 @@ export default function BulletHellGame() {
       {gameState === 'playing' && (
         <button
           onClick={() => setGameState('paused')}
-          className="absolute top-4 left-1/2 -translate-x-1/2 font-mono text-xs text-gray-500 hover:text-gray-300 transition-colors px-3 py-1 border border-gray-700 rounded hover:border-gray-500"
+          className="absolute top-4 left-1/2 -translate-x-1/2 font-mono text-xs text-gray-500 hover:text-gray-300 transition-colors px-3 py-1 border border-gray-700 rounded hover:border-gray-500 pointer-events-auto"
         >
           [PAUSE]
         </button>

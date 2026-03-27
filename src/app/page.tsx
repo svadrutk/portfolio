@@ -2,7 +2,6 @@
 
 import { ArrowUpRight } from 'lucide-react';
 import AnimatedSection from '@/components/AnimatedSection';
-import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useTransition, useState, useEffect } from 'react';
 

@@ -62,8 +62,8 @@ export default function Home() {
                 Chorusboard
               </a>{' '}
               for song rankings. Currently an FDE at{' '}
-              <a href="https://endeavor.ai" target="_blank" rel="noopener noreferrer" className="text-red-400 hover:underline">
-                Endeavor
+              <a href="https://speakeasy.com" target="_blank" rel="noopener noreferrer" className="text-indigo-700 hover:underline">
+                Speakeasy
               </a>
               .
             </p>

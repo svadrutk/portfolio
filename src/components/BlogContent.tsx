@@ -7,7 +7,7 @@ import rehypeRaw from 'rehype-raw';
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { calculateReadTime } from '@/utils/readTime';
-import 'highlight.js/styles/github-dark.css';
+import 'highlight.js/styles/github.css';
 
 interface Post {
   slug: string;
@@ -61,7 +61,7 @@ export default function BlogContent({ slug }: BlogContentProps) {
 
   if (!slug) {
     return (
-      <motion.div 
+      <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         className="h-full flex items-center justify-center font-cooper"
@@ -104,40 +104,40 @@ export default function BlogContent({ slug }: BlogContentProps) {
       transition={{ duration: 0.3 }}
       className="prose prose-lg max-w-none mx-auto px-4 py-8 font-cooper"
     >
-      <h1 className="text-4xl font-light tracking-tight mb-4 text-gray-100">{post.title}</h1>
-      <div className="flex items-center gap-4 text-sm text-gray-500 mb-8">
+      <h1 className="text-4xl font-light tracking-tight mb-4 text-gray-900">{post.title}</h1>
+      <div className="flex items-center gap-4 text-sm text-gray-600 mb-8">
         <span>{formatDate(post.date)}</span>
         <span>•</span>
         <span>{readTime} min read</span>
       </div>
-      <div className="prose prose-xl text-xl prose-headings:font-light prose-headings:text-gray-200 prose-p:text-gray-300 prose-li:text-gray-300 prose-ol:text-gray-300 prose-ul:text-gray-300 prose-strong:text-gray-200 prose-a:text-blue-400 hover:prose-a:text-blue-300">
+      <div className="prose prose-xl text-xl prose-headings:font-light prose-headings:text-gray-900 prose-p:text-gray-700 prose-li:text-gray-700 prose-ol:text-gray-700 prose-ul:text-gray-700 prose-strong:text-gray-900 prose-a:text-blue-600 hover:prose-a:text-blue-700">
         <ReactMarkdown
           remarkPlugins={[remarkGfm]}
           rehypePlugins={[rehypeHighlight, rehypeRaw]}
           components={{
             h2: ({ children }) => (
-              <h2 className="text-2xl font-light text-gray-200 mt-10 mb-4">{children}</h2>
+              <h2 className="text-2xl font-light text-gray-900 mt-10 mb-4">{children}</h2>
             ),
             h3: ({ children }) => (
-              <h3 className="text-xl font-light text-gray-200 mt-8 mb-3">{children}</h3>
+              <h3 className="text-xl font-light text-gray-900 mt-8 mb-3">{children}</h3>
             ),
             p: ({ children }) => (
-              <p className="mb-6 text-gray-300">{children}</p>
+              <p className="mb-6 text-gray-700">{children}</p>
             ),
             ol: ({ children }) => (
-              <ol className="list-decimal pl-6 mb-6 text-gray-300">{children}</ol>
+              <ol className="list-decimal pl-6 mb-6 text-gray-700">{children}</ol>
             ),
             ul: ({ children }) => (
-              <ul className="list-disc pl-6 mb-6 text-gray-300">{children}</ul>
+              <ul className="list-disc pl-6 mb-6 text-gray-700">{children}</ul>
             ),
             li: ({ children }) => (
-              <li className="mb-2 text-gray-300">{children}</li>
+              <li className="mb-2 text-gray-700">{children}</li>
             ),
             a: ({ href, children }) => (
-              <a href={href} target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300">{children}</a>
+              <a href={href} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-700">{children}</a>
             ),
             blockquote: ({ children }) => (
-              <blockquote className="border-l-4 border-gray-600 pl-4 italic my-6 text-gray-400">{children}</blockquote>
+              <blockquote className="border-l-4 border-gray-400 pl-4 italic my-6 text-gray-600">{children}</blockquote>
             ),
             br: () => <br className="mb-6" />
           }}

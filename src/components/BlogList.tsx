@@ -45,15 +45,15 @@ export default function BlogList({ onSelectPost, selectedSlug }: BlogListProps) 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3 }}
-            className={`cursor-pointer p-4 rounded-lg hover:bg-gray-800/50 transition-colors ${
-              selectedSlug === post.slug 
-                ? 'bg-gray-800/70 border-l-4 border-gray-400 md:border-l-0 md:border-r-4' 
-                : 'text-gray-400'
+            className={`cursor-pointer p-4 rounded-lg hover:bg-gray-200/50 transition-colors ${
+              selectedSlug === post.slug
+                ? 'bg-gray-200/70 border-l-4 border-gray-700 md:border-l-0 md:border-r-4'
+                : 'text-gray-600'
             }`}
             onClick={() => onSelectPost(post.slug)}
           >
             <h2 className={`text-xl md:text-2xl font-light tracking-tight mb-2 ${
-              selectedSlug === post.slug ? 'text-gray-200' : 'text-gray-300'
+              selectedSlug === post.slug ? 'text-gray-900' : 'text-gray-700'
             }`}>
               {post.title}
             </h2>

@@ -21,9 +21,9 @@ export default function BlogPage() {
 
   return (
     <>
-      <button 
+      <button
         onClick={handleBackClick}
-        className="fixed bottom-4 left-4 p-3 text-gray-500 transition-all hover:text-gray-300 z-50 hover:cursor-pointer bg-black/80 backdrop-blur-sm rounded-full shadow-sm border border-gray-700 hover:border-gray-600"
+        className="fixed bottom-4 left-4 p-3 text-gray-600 transition-all hover:text-gray-800 z-50 hover:cursor-pointer bg-white/80 backdrop-blur-sm rounded-full shadow-sm border border-gray-200 hover:border-gray-300"
         style={{ opacity: isPending ? 0.5 : 1 }}
       >
         <ArrowLeftFromLine className="w-6 h-6" />
@@ -31,7 +31,7 @@ export default function BlogPage() {
 
       <div className="min-h-screen w-full font-cooper">
         <div className="h-screen flex flex-col md:grid md:grid-cols-[30%_70%]">
-          <AnimatedSection delay={0.4} className="border-b md:border-b-0 md:border-r border-gray-700 p-4 md:p-6 overflow-y-auto">
+          <AnimatedSection delay={0.4} className="border-b md:border-b-0 md:border-r border-gray-300 p-4 md:p-6 overflow-y-auto">
             <div className="w-full">
               <BlogList 
                 onSelectPost={setSelectedSlug} 

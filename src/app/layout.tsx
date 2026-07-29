@@ -1,14 +1,21 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
-import { Geist_Mono } from "next/font/google";
+import { Geist_Mono, Inter } from "next/font/google";
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/next';
-import BulletHellGame from '@/components/BulletHellGame';
+import CursorTrail from '@/components/CursorTrail';
 import "./globals.css";
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   weight: ["400"],
+  subsets: ["latin"],
+  display: "swap",
+});
+
+const inter = Inter({
+  variable: "--font-inter",
+  weight: ["400", "500", "600", "700"],
   subsets: ["latin"],
   display: "swap",
 });
@@ -71,10 +78,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${cooperBT.variable} ${geistMono.variable} antialiased`}
+        className={`${cooperBT.variable} ${geistMono.variable} ${inter.variable} antialiased`}
       >
-        <BulletHellGame />
-        <div className="min-h-screen relative z-10">
+        <CursorTrail />
+        <div className="min-h-screen">
           {children}
         </div>
         <Analytics />

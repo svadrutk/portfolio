@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 :root {
-  --background: #0d0d0d;
-  --foreground: #e5e5e5;
+  --background: #faf8f3;
+  --foreground: #1a1a1a;
 }
 
 @theme inline {
@@ -12,12 +12,13 @@
   --font-mono: var(--font-geist-mono);
   --font-cooper: var(--font-cooper);
   --font-geist-mono: var(--font-geist-mono);
+  --font-inter: var(--font-inter);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: var(--font-inter);
 }
 
 .font-cooper {
@@ -30,4 +31,17 @@ body {
 }
 .animate-spin-slow {
   animation: spin-slow 4s linear infinite;
+}
+
+.trail-char {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 0.9rem;
+  color: #1a1a1a;
+  animation: trail-fade 0.8s ease-out forwards;
+}
+@keyframes trail-fade {
+  0% { opacity: 0.9; }
+  100% { opacity: 0; transform: translate(-50%, -80%) scale(0.6); }
 }

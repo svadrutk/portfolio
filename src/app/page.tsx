@@ -46,22 +46,22 @@ export default function Home() {
           <AnimatedSection delay={0}>
             <h1 className="text-3xl font-bold font-mono">
               {displayedText}
-              <span className={`inline-block w-3 h-8 bg-black ml-1 align-middle ${showCursor ? 'opacity-100' : 'opacity-0'}`}></span>
+              <span className={`inline-block w-3 h-8 bg-foreground ml-1 align-middle ${showCursor ? 'opacity-100' : 'opacity-0'}`}></span>
             </h1>
           </AnimatedSection>
 
           <AnimatedSection delay={0.2}>
             <p className="text-gray-600 leading-relaxed">
                I build products that make people&apos;s lives easier. I studied CS and Data Science at UW–Madison, where I co-founded{' '}
-              <a href="https://campusfy.app" target="_blank" rel="noopener noreferrer" className="text-red-600 hover:underline">
+              <a href="https://campusfy.app" target="_blank" rel="noopener noreferrer" className="text-red-400 hover:underline">
                 Campusfy
               </a>{' '}
               — helping students discover classes and plan degrees. I also built{' '}
-              <a href="https://trackhuntr.com" target="_blank" rel="noopener noreferrer" className="text-green-700 hover:underline">
+              <a href="https://trackhuntr.com" target="_blank" rel="noopener noreferrer" className="text-green-400 hover:underline">
                 TrackHuntr
               </a>{' '}
               for EDM fans and{' '}
-              <a href="https://chorusboard.app" target="_blank" rel="noopener noreferrer" className="text-amber-700 hover:underline">
+              <a href="https://chorusboard.app" target="_blank" rel="noopener noreferrer" className="text-amber-400 hover:underline">
                 Chorusboard
               </a>{' '}
               for song rankings. Currently an FDE at{' '}

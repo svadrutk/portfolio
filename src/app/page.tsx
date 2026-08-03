@@ -10,6 +10,7 @@ export default function Home() {
   const [isPending, startTransition] = useTransition();
   const [displayedText, setDisplayedText] = useState('');
   const [showCursor, setShowCursor] = useState(true);
+  const [revealed, setRevealed] = useState(false);
   const fullText = "Hi, I'm Swad";
 
   useEffect(() => {
@@ -20,6 +21,7 @@ export default function Home() {
         index++;
       } else {
         clearInterval(timer);
+        setTimeout(() => setRevealed(true), 1000);
       }
     }, 100);
     return () => clearInterval(timer);
@@ -50,7 +52,7 @@ export default function Home() {
             </h1>
           </AnimatedSection>
 
-          <AnimatedSection delay={0.2}>
+          <AnimatedSection delay={0.2} active={revealed}>
             <p className="text-gray-600 leading-relaxed">
                I build products that make people&apos;s lives easier. I studied CS and Data Science at UW–Madison, where I co-founded{' '}
               <a href="https://campusfy.app" target="_blank" rel="noopener noreferrer" className="text-red-400 hover:underline">
@@ -72,7 +74,7 @@ export default function Home() {
             </p>
           </AnimatedSection>
 
-          <AnimatedSection delay={0.4}>
+          <AnimatedSection delay={0.4} active={revealed}>
             <div className="grid grid-cols-2 gap-8">
             <div>
               <h2 className="text-lg text-gray-500 mb-3 font-mono">LINKS</h2>
@@ -112,7 +114,7 @@ export default function Home() {
             </div>
           </AnimatedSection>
 
-          <AnimatedSection delay={0.6}>
+          <AnimatedSection delay={0.6} active={revealed}>
             <div className="border-t border-gray-300 pt-6">
               <p className="text-sm text-gray-600 text-center font-mono">
                 kukunoorusvadrut [at] gmail [dot] com

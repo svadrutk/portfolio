@@ -1,6 +1,7 @@
 'use client';
 
 import { ArrowUpRight } from 'lucide-react';
+import { motion } from 'framer-motion';
 import AnimatedSection from '@/components/AnimatedSection';
 import { useRouter } from 'next/navigation';
 import { useTransition, useState, useEffect } from 'react';
@@ -10,6 +11,7 @@ export default function Home() {
   const [isPending, startTransition] = useTransition();
   const [displayedText, setDisplayedText] = useState('');
   const [showCursor, setShowCursor] = useState(true);
+  const [settled, setSettled] = useState(false);
   const [revealed, setRevealed] = useState(false);
   const fullText = "Hi, I'm Swad";
 
@@ -21,7 +23,7 @@ export default function Home() {
         index++;
       } else {
         clearInterval(timer);
-        setTimeout(() => setRevealed(true), 1000);
+        setTimeout(() => setSettled(true), 600);
       }
     }, 100);
     return () => clearInterval(timer);
@@ -41,18 +43,39 @@ export default function Home() {
     });
   };
 
+  useEffect(() => {
+    if (!settled) return;
+    const t = setTimeout(() => setRevealed(true), 750);
+    return () => clearTimeout(t);
+  }, [settled]);
+
+  const heading = (
+    <motion.h1
+      layoutId="hero-title"
+      transition={{ type: 'tween', duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+      className="text-3xl font-bold font-mono relative w-fit whitespace-nowrap"
+    >
+      {/* invisible spacer reserves final width so typing never reflows the box */}
+      <span aria-hidden className="opacity-0">{fullText}</span>
+      <span className="absolute inset-0 whitespace-nowrap">
+        {displayedText}
+        <span className={`inline-block w-3 h-8 bg-foreground ml-1 align-middle ${showCursor ? 'opacity-100' : 'opacity-0'}`}></span>
+      </span>
+    </motion.h1>
+  );
+
   return (
     <div className="min-h-screen flex items-center justify-center">
+      {!settled && (
+        <div className="fixed inset-0 z-10 flex items-center justify-center px-6">
+          {heading}
+        </div>
+      )}
       <div className="w-full max-w-2xl mx-auto px-6">
         <div className="grid gap-8 py-8">
-          <AnimatedSection delay={0}>
-            <h1 className="text-3xl font-bold font-mono">
-              {displayedText}
-              <span className={`inline-block w-3 h-8 bg-foreground ml-1 align-middle ${showCursor ? 'opacity-100' : 'opacity-0'}`}></span>
-            </h1>
-          </AnimatedSection>
+          {settled && heading}
 
-          <AnimatedSection delay={0.2} active={revealed}>
+          <AnimatedSection delay={0} active={revealed}>
             <p className="text-gray-600 leading-relaxed">
                I build products that make people&apos;s lives easier. I studied CS and Data Science at UW–Madison, where I co-founded{' '}
               <a href="https://campusfy.app" target="_blank" rel="noopener noreferrer" className="text-red-400 hover:underline">
@@ -74,7 +97,7 @@ export default function Home() {
             </p>
           </AnimatedSection>
 
-          <AnimatedSection delay={0.4} active={revealed}>
+          <AnimatedSection delay={0.15} active={revealed}>
             <div className="grid grid-cols-2 gap-8">
             <div>
               <h2 className="text-lg text-gray-500 mb-3 font-mono">LINKS</h2>
@@ -114,7 +137,7 @@ export default function Home() {
             </div>
           </AnimatedSection>
 
-          <AnimatedSection delay={0.6} active={revealed}>
+          <AnimatedSection delay={0.3} active={revealed}>
             <div className="border-t border-gray-300 pt-6">
               <p className="text-sm text-gray-600 text-center font-mono">
                 kukunoorusvadrut [at] gmail [dot] com

@@ -1,16 +1,16 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
-import { Geist_Mono, Inter } from "next/font/google";
+import { Inter } from "next/font/google";
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/next';
-import CursorTrail from '@/components/CursorTrail';
+import TargetCursor from '@/components/TargetCursor';
 import "./globals.css";
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  weight: ["400"],
-  subsets: ["latin"],
-  display: "swap",
+const departureMono = localFont({
+  src: '../../public/fonts/departure-mono/DepartureMono-Regular.woff2',
+  variable: '--font-departure-mono',
+  weight: '400',
+  display: 'swap',
 });
 
 const inter = Inter({
@@ -78,9 +78,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${cooperBT.variable} ${geistMono.variable} ${inter.variable} antialiased`}
+        className={`${cooperBT.variable} ${departureMono.variable} ${inter.variable} antialiased`}
       >
-        <CursorTrail />
+        <TargetCursor targetSelector="a[href], [role='link']" parallaxOn={false} />
         <div className="min-h-screen">
           {children}
         </div>

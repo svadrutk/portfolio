@@ -9,9 +9,8 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-serif: var(--font-cooper);
-  --font-mono: var(--font-geist-mono);
+  --font-mono: var(--font-departure-mono);
   --font-cooper: var(--font-cooper);
-  --font-geist-mono: var(--font-geist-mono);
   --font-inter: var(--font-inter);
 
   /* Dark mode: invert the neutral scale so hardcoded light-mode utilities
@@ -50,15 +49,6 @@ body {
   animation: spin-slow 4s linear infinite;
 }
 
-.trail-char {
-  position: absolute;
-  transform: translate(-50%, -50%);
-  font-family: var(--font-geist-mono), monospace;
-  font-size: 0.9rem;
-  color: #ededed;
-  animation: trail-fade 0.8s ease-out forwards;
-}
-@keyframes trail-fade {
-  0% { opacity: 0.9; }
-  100% { opacity: 0; transform: translate(-50%, -80%) scale(0.6); }
+code, kbd, samp, pre {
+  font-family: var(--font-departure-mono), monospace;
 }

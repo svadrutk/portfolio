@@ -365,7 +365,7 @@ export default function BulletHellGame() {
 
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      ctx.font = '16px var(--font-geist-mono), monospace';
+      ctx.font = `16px ${getComputedStyle(document.body).getPropertyValue('--font-departure-mono').trim()}, monospace`;
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
 

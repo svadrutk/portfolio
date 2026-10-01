@@ -37,6 +37,11 @@
     "rehype-raw": "^7.0.0",
     "remark-gfm": "^4.0.1"
   },
+  "overrides": {
+    "next": {
+      "sharp": "0.34.5"
+    }
+  },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "@tailwindcss/postcss": "^4",

@@ -1,14 +1,14 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
-import { Inter } from "next/font/google";
+import { EB_Garamond, Inter } from "next/font/google";
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import TargetCursor from '@/components/TargetCursor';
 import "./globals.css";
 
-const departureMono = localFont({
-  src: '../../public/fonts/departure-mono/DepartureMono-Regular.woff2',
-  variable: '--font-departure-mono',
+const gtPressuraMono = localFont({
+  src: '../../public/fonts/gt-pressura-mono/GT-Pressura-Mono-Regular.otf',
+  variable: '--font-gt-pressura-mono',
   weight: '400',
   display: 'swap',
 });
@@ -16,6 +16,14 @@ const departureMono = localFont({
 const inter = Inter({
   variable: "--font-inter",
   weight: ["400", "500", "600", "700"],
+  subsets: ["latin"],
+  display: "swap",
+});
+
+const garamond = EB_Garamond({
+  variable: "--font-eb-garamond",
+  weight: "400",
+  style: "italic",
   subsets: ["latin"],
   display: "swap",
 });
@@ -78,9 +86,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${cooperBT.variable} ${departureMono.variable} ${inter.variable} antialiased`}
+        className={`${cooperBT.variable} ${gtPressuraMono.variable} ${inter.variable} ${garamond.variable} antialiased`}
       >
-        <TargetCursor targetSelector="a[href], [role='link']" parallaxOn={false} />
+        <TargetCursor targetSelector="" parallaxOn={false} />
         <div className="min-h-screen">
           {children}
         </div>

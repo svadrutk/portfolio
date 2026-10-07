@@ -1,39 +1,55 @@
 'use client';
 
-import { ArrowUpRight } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { ArrowUpRight, Copy } from 'lucide-react';
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import AnimatedSection from '@/components/AnimatedSection';
 import { useRouter } from 'next/navigation';
-import { useTransition, useState, useEffect } from 'react';
+import { useTransition, useState, useEffect, useLayoutEffect, useRef } from 'react';
 
 export default function Home() {
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
-  const [displayedText, setDisplayedText] = useState('');
-  const [showCursor, setShowCursor] = useState(true);
+  const headingSlotRef = useRef<HTMLDivElement>(null);
+  const [introOffset, setIntroOffset] = useState<{ x: number; y: number } | null>(null);
   const [settled, setSettled] = useState(false);
   const [revealed, setRevealed] = useState(false);
-  const fullText = "Hi, I'm Swad";
+  const [toast, setToast] = useState('');
+  const [toastId, setToastId] = useState(0);
+  const reduceMotion = useReducedMotion();
+  const toastTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const email = 'kukunoorusvadrut@gmail.com';
 
-  useEffect(() => {
-    let index = 0;
-    const timer = setInterval(() => {
-      if (index <= fullText.length) {
-        setDisplayedText(fullText.slice(0, index));
-        index++;
-      } else {
-        clearInterval(timer);
-        setTimeout(() => setSettled(true), 600);
-      }
-    }, 100);
-    return () => clearInterval(timer);
+  useEffect(() => () => {
+    if (toastTimerRef.current) clearTimeout(toastTimerRef.current);
   }, []);
 
-  useEffect(() => {
-    const cursorTimer = setInterval(() => {
-      setShowCursor(prev => !prev);
-    }, 530);
-    return () => clearInterval(cursorTimer);
+  const handleCopyEmail = async () => {
+    let message = 'copied!';
+    try {
+      await navigator.clipboard.writeText(email);
+    } catch {
+      message = 'Could not copy. Please try again.';
+    }
+    if (toastTimerRef.current) clearTimeout(toastTimerRef.current);
+    setToast(message);
+    setToastId(id => id + 1);
+    toastTimerRef.current = setTimeout(() => setToast(''), 2500);
+  };
+
+  const fullText = "Hi, I'm Swad";
+
+  useLayoutEffect(() => {
+    const measure = () => {
+      if (!headingSlotRef.current) return;
+      const rect = headingSlotRef.current.getBoundingClientRect();
+      setIntroOffset({
+        x: window.innerWidth / 2 - (rect.left + rect.width / 2),
+        y: window.innerHeight / 2 - (rect.top + rect.height / 2),
+      });
+    };
+    measure();
+    window.addEventListener('resize', measure);
+    return () => window.removeEventListener('resize', measure);
   }, []);
 
   const handleBlogClick = (e: React.MouseEvent) => {
@@ -51,29 +67,36 @@ export default function Home() {
 
   const heading = (
     <motion.h1
-      layoutId="hero-title"
-      transition={{ type: 'tween', duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-      className="text-3xl font-bold font-mono relative w-fit whitespace-nowrap"
+      initial={false}
+      animate={settled ? { x: 0, y: 0 } : (introOffset ?? { x: 0, y: 0 })}
+      style={{ visibility: introOffset ? 'visible' : 'hidden' }}
+      transition={{ type: 'tween', duration: settled ? 0.8 : 0, ease: [0.22, 1, 0.36, 1] }}
+      className="text-6xl font-garamond font-normal italic relative z-10 w-fit whitespace-nowrap"
     >
-      {/* invisible spacer reserves final width so typing never reflows the box */}
-      <span aria-hidden className="opacity-0">{fullText}</span>
-      <span className="absolute inset-0 whitespace-nowrap">
-        {displayedText}
-        <span className={`inline-block w-3 h-8 bg-foreground ml-1 align-middle ${showCursor ? 'opacity-100' : 'opacity-0'}`}></span>
+      <span className="inline-flex items-center whitespace-nowrap">
+        <span>
+          {fullText.split(' ').map((word, index) => (
+            <motion.span
+              key={word}
+              className="inline-block"
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              onAnimationComplete={index === 2 ? () => setSettled(true) : undefined}
+              transition={{ duration: 1, delay: [0, 0.64, 0.96][index], ease: [0.22, 1, 0.36, 1] }}
+            >
+              {word}{index < 2 ? '\u00a0' : ''}
+            </motion.span>
+          ))}
+        </span>
       </span>
     </motion.h1>
   );
 
   return (
     <div className="min-h-screen flex items-center justify-center">
-      {!settled && (
-        <div className="fixed inset-0 z-10 flex items-center justify-center px-6">
-          {heading}
-        </div>
-      )}
       <div className="w-full max-w-2xl mx-auto px-6">
         <div className="grid gap-8 py-8">
-          {settled && heading}
+          <div ref={headingSlotRef} className="w-fit">{heading}</div>
 
           <AnimatedSection delay={0} active={revealed}>
             <p className="text-gray-600 leading-relaxed">
@@ -90,7 +113,7 @@ export default function Home() {
                 Chorusboard
               </a>{' '}
               for song rankings. Currently an FDE at{' '}
-              <a href="https://speakeasy.com" target="_blank" rel="noopener noreferrer" className="bg-[linear-gradient(to_right,#ff0000,#ff7f00,#ffd000,#00b000,#0000ff,#4b0082,#8b00ff)] bg-clip-text text-transparent font-medium hover:underline">
+              <a href="https://speakeasy.com" target="_blank" rel="noopener noreferrer" className="speakeasy-link font-medium">
                 Speakeasy
               </a>
               .
@@ -102,15 +125,15 @@ export default function Home() {
             <div>
               <h2 className="text-lg text-gray-500 mb-3 font-mono">LINKS</h2>
               <div className="space-y-1">
-                <a href="https://linkedin.com/in/svadrut" target="_blank" rel="noopener noreferrer" className="flex justify-between items-center group text-gray-500 hover:text-gray-900 transition-colors">
+                <a href="https://linkedin.com/in/svadrut" target="_blank" rel="noopener noreferrer" className="cursor-target flex justify-between items-center group text-gray-500 hover:text-gray-900 transition-colors">
                   <span>LinkedIn</span>
                   <ArrowUpRight className="w-4 h-4 transition-colors" />
                 </a>
-                <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" className="flex justify-between items-center group text-gray-500 hover:text-gray-900 transition-colors">
+                <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" className="cursor-target flex justify-between items-center group text-gray-500 hover:text-gray-900 transition-colors">
                   <span>Resumé</span>
                   <ArrowUpRight className="w-4 h-4 transition-colors" />
                 </a>
-                <a href="/blog" onClick={handleBlogClick} className="flex justify-between items-center group text-gray-500 hover:text-gray-900 transition-colors">
+                <a href="/blog" onClick={handleBlogClick} className="cursor-target flex justify-between items-center group text-gray-500 hover:text-gray-900 transition-colors">
                   <span className={isPending ? 'opacity-50' : ''}>Blog</span>
                   <ArrowUpRight className={`w-4 h-4 transition-colors ${isPending ? 'opacity-50' : ''}`} />
                 </a>
@@ -138,13 +161,45 @@ export default function Home() {
           </AnimatedSection>
 
           <AnimatedSection delay={0.3} active={revealed}>
-            <div className="border-t border-gray-300 pt-6">
-              <p className="text-sm text-gray-600 text-center font-mono">
+            <div className="border-t border-gray-300 pt-6 text-center">
+              <button
+                type="button"
+                onClick={handleCopyEmail}
+                aria-label={`Copy email address: ${email}`}
+                className="cursor-target group relative text-sm text-gray-600 hover:text-gray-900 transition-colors font-mono rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-yellow-400"
+              >
                 kukunoorusvadrut [at] gmail [dot] com
-              </p>
+                <Copy
+                  aria-hidden="true"
+                  className="absolute left-full top-1/2 ml-2 h-4 w-4 -translate-y-1/2 opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100"
+                />
+              </button>
             </div>
           </AnimatedSection>
         </div>
+      </div>
+      <div
+        role="status"
+        aria-live="polite"
+        aria-atomic="true"
+        className="fixed bottom-6 inset-x-0 z-50 flex justify-center pointer-events-none px-4"
+      >
+        <AnimatePresence mode="wait">
+          {toast && (
+            <motion.div
+              key={toastId}
+              initial={{ opacity: 0, y: reduceMotion ? 0 : 16, scale: reduceMotion ? 1 : 0.95 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: reduceMotion ? 0 : 8, scale: reduceMotion ? 1 : 0.97 }}
+              transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
+              className="toast-gradient-glow"
+            >
+              <div className="toast-gradient-border relative overflow-hidden rounded-lg border border-transparent bg-neutral-950/85 px-5 py-3 text-foreground shadow-[0_8px_32px_rgba(0,0,0,0.4)] backdrop-blur-xl">
+                <span className="font-mono text-sm tracking-wide">{toast}</span>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </div>
   );

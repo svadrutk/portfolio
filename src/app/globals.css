@@ -1,6 +1,7 @@
 @import "tailwindcss";
 
 :root {
+  --speakeasy-gradient: linear-gradient(to right, #ff0000, #ff7f00, #ffd000, #00b000, #0000ff);
   --background: #0d0d0d;
   --foreground: #ededed;
 }
@@ -9,7 +10,8 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-serif: var(--font-cooper);
-  --font-mono: var(--font-departure-mono);
+  --font-mono: var(--font-gt-pressura-mono);
+  --font-garamond: var(--font-eb-garamond);
   --font-cooper: var(--font-cooper);
   --font-inter: var(--font-inter);
 
@@ -50,5 +52,64 @@ body {
 }
 
 code, kbd, samp, pre {
-  font-family: var(--font-departure-mono), monospace;
+  font-family: var(--font-gt-pressura-mono), monospace;
+}
+
+.speakeasy-link {
+  position: relative;
+  display: inline-block;
+  background-image: var(--speakeasy-gradient);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  text-decoration: none;
+}
+
+.speakeasy-link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background-image: var(--speakeasy-gradient);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.speakeasy-link:hover::after,
+.speakeasy-link:focus-visible::after {
+  opacity: 1;
+}
+
+.toast-gradient-glow {
+  position: relative;
+  isolation: isolate;
+  border-radius: 8px;
+}
+
+.toast-gradient-glow::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  z-index: -1;
+  border-radius: inherit;
+  background-image: var(--speakeasy-gradient);
+  filter: blur(14px);
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+.toast-gradient-border::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  padding: 1px;
+  border-radius: inherit;
+  background-image: var(--speakeasy-gradient);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
 }
